@@ -10,10 +10,16 @@
    <link rel="stylesheet" href="src/css/styles.css">
  </head>
  <body>
-    <div class="container bg-danger">
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
-            Doct'ISEN
-        </p>
+    <div id="acceuil">
+        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
+        <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3">
+            <button type="button" class="btn btn-light" style="top: 7px;">Vous êtes praticien ?</button>
+            <div id="login">
+                <p class="text-white fw-bold">Se connecter</p>
+                <p class="text-red-700 fw-semibold">Gérer mes rdv</p>
+            </div>
+        </div>
+        <p>Trouvez un rendez vous avec un medecin</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </body>

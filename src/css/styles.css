@@ -1,3 +1,10 @@
 #DoctISEN{
     font-family: 'Just Me Again Down Here', cursive;
+    color: white;
+}
+
+#acceuil{
+    /* red background on 540 px */
+    background-color: #ff0000;
+    height: 50vh;
 }
