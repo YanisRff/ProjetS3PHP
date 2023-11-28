@@ -8,13 +8,18 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="src/css/styles.css">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </head>
  <body style="background-color: #EEF2F7">
-    <div style ="background-color: #FF0000" >
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
-            Doct'ISEN
-        </p>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+ <nav class="navbar bg-body-tertiary">
+     <div class="container">
+         <a class="navbar-brand" href="#">
+             <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+                 Doct'ISEN
+             </p>
+         </a>
+     </div>
+ </nav>
+
  </body>
 </html>
