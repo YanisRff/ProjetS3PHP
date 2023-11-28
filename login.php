@@ -9,7 +9,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="src/css/styles.css">
  </head>
- <body>
+ <body style="background-color: #EEF2F7">
     <div class="container bg-danger">
         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
             Doct'ISEN
