@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="src/css/styles.css">
  </head>
  <body style="background-color: #EEF2F7">
-    <div class="container bg-danger">
+    <div style ="background-color: #FF0000" >
         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
             Doct'ISEN
         </p>
