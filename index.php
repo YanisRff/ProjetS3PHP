@@ -13,13 +13,51 @@
     <div id="acceuil">
         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
         <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3">
-            <button type="button" class="btn btn-light" style="top: 7px;">Vous êtes praticien ?</button>
+            <button type="button" class="btn btn-light" style="top: 0.4375em;">Vous êtes praticien ?</button>
             <div id="login">
                 <p class="text-white fw-bold">Se connecter</p>
                 <p class="text-red-700 fw-semibold">Gérer mes rdv</p>
             </div>
+            <p>   </p>
         </div>
-        <p>Trouvez un rendez vous avec un medecin</p>
+        <div id="rdv">
+            <p class="text-white fw-bold fs-3">Trouvez un rendez vous avec un medecin</p>
+            <form class="input-group" method="post">
+                <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
+                <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
+                <button class="btn btn-success" type="submit" id="button-addon2">Rechercher</button>
+            </form>
+        </div>
+        <img src="src/img/img_index.png" alt="img_index" id="img_index">
+        <div class="d-flex justify-content-center gap-5 w-100" id="cardPos">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Information</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Ligue contre le cancer</h6>
+                    <p class="card-text">Mois sans tabac: c’est le moment d’arrêter !</p>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Information</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Pharmacie Sanchez</h6>
+                    <p class="card-text">Le rôle du phramacien évolue: Venez nous voir.</p>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Information</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Doct’ISEN</h6>
+                    <p class="card-text">Un empechement: Prevenez votre soignant.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="fixed-bottom m-2 mx-4">
+            <p>Recherche de praticiens</p>
+            <p>Doct’ISEN, 33 QUATER Av. du Champ de Manœuvre, 44470 Carquefou</p>
+            <p class="text-secondary">Conditions générales d'utilisation • Conditions d'utilisation du site Doct'ISEN • Politique relative à la protection des données personnelles • Politique en matière de cookies • Gestion des cookies et consentement • Règles de référencement • Mentions légales</p>
+            <p class="text-secondary">Annuaire des médecins du CNOM • Annuaire des chirurgiens-dentistes de l'ONCD • Ordre National des Médecins • Ordre National des Chirurgiens-Dentistes</p>
+        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </body>
