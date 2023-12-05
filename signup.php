@@ -17,7 +17,7 @@
      </p>
  </div>
 
- <div class="SignInSecondaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
+ <div class="signInSecondaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
      <div class="dropdown-menu text-center align-content-center">
          <h5 class="fw-bold">J'ai déjà un compte Doct'ISEN?</h5>
          <a href="login.php" class="">
