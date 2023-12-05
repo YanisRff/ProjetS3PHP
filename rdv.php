@@ -10,8 +10,8 @@
    <link rel="stylesheet" href="src/css/styles.css">
  </head>
  <body>
-    <div class="container bg-danger">
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+    <div class="container">
+        <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
             Doct'ISEN
         </p>
     </div>
