@@ -72,19 +72,13 @@
 }
 
 .signInSecondaryCard{
-    position: fixed;
-    top: 5%;
     left: 30%;
     width: 40%;
-    height: 70%;
 }
 
 .SignInPrimaryCard{
-    position: fixed;
-    top: 20%;
     left: 30%;
     width: 40%;
-    height: 70%;
 }
 
 #searchbar{
@@ -93,4 +87,8 @@
 
 .gap-6 {
     gap: 26rem !important;
+}
+
+.ms-6{
+margin-left: 6rem !important;
 }
