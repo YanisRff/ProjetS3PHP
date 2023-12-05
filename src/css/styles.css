@@ -36,3 +36,7 @@
     position: fixed;
     top: 48vh;
 }
+
+.pointer{
+    cursor: pointer;
+}

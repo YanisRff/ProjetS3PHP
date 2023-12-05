@@ -28,7 +28,7 @@
                 <div class="d-flex flex-column">
                     <div class="border-bottom pb-3 border-dark border-3 align-self-center">
                         <h5 class="text-center">Vos rendez-vous à venir</h5>
-                        <div class="card rounded-4 mx-2">
+                        <div class="card rounded-4 mx-2 pointer">
                             <div class="card-header bg-danger">
                                 <div class="d-flex flex-row justify-content-between text-white">
                                     <p>Jeudi 30 Novembre 2023</p>
