@@ -14,7 +14,7 @@
  <nav class="navbar bg-body-tertiary">
      <div class="container">
          <a class="navbar-brand" href="#">
-             <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+             <p id ="topbar">
                  Doct'ISEN
              </p>
          </a>

@@ -31,3 +31,10 @@
     position: fixed;
     top: 48vh;
 }
+
+#topbar{
+    font-family: 'Just Me Again Down Here', cursive;
+    color: white;
+    background-color: #ff0000;
+    height: 5vh;
+}
