@@ -11,34 +11,32 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </head>
  <body style="background-color: #EEF2F7">
- <nav class="navbar bg-body-tertiary">
-     <div class="container">
-         <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
-             Doct'ISEN
-         </p>
-     </div>
- </nav>
+ <div id="topbar">
+     <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+         Doct'ISEN
+     </p>
+ </div>
 
- <div class="loginPrimaryCard p-3 m-0 border-0 bd-example m-0 border-0">
+ <div class="loginPrimaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center">
      <div class="loginInsideCard dropdown-menu">
-         <h5 class="loginTitle">J'ai déjà un compte Doct'ISEN</h5>
-         <form class="px-4 py-3">
+         <h5 class="text-center fw-bold">J'ai déjà un compte Doct'ISEN</h5>
+         <form class="px-4 py-3 align-content-center text-center">
              <div class="mb-3">
                  <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
                  <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
              </div>
              <div class="mb-3">
                  <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                 <input type="palogButtonssword" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
              </div>
              <button type="submit" class="btn btn-danger logButton">Se connecter</button>
          </form>
      </div>
  </div>
- <div class="loginSecondaryCard p-3 m-0 border-0 bd-example m-0 border-0">
-    <div class="dropdown-menu">
-        <h5 class="loginTitle">Nouveau sur Doct'ISEN?</h5>
-        <a href="signup.php" class="logButtonContainer">
+ <div class="loginSecondaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
+    <div class="dropdown-menu text-center align-content-center">
+        <h5 class="fw-bold">Nouveau sur Doct'ISEN?</h5>
+        <a href="signup.php" class="">
             <button class="btn btn-danger logButton">S'inscrire</button>
         </a>
      </div>
