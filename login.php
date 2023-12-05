@@ -25,10 +25,11 @@
      </p>
  </div>
 
- <div class="loginPrimaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center">
+ <div class="loginPrimaryCard p-3 m-0 border-0 bd-example m-0 border-0">
      <div class="loginInsideCard dropdown-menu">
          <h5 class="text-center fw-bold">J'ai déjà un compte Doct'ISEN</h5>
-         <form class="px-4 py-3 align-content-center text-center" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+         <form class="px-4 py-3" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+             <div>
              <div class="mb-3">
                  <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
                  <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="mail">
@@ -37,7 +38,10 @@
                  <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
                  <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
              </div>
-             <button type="submit" class="btn btn-danger logButton">Se connecter</button>
+             </div>
+             <div class="text-center justify-content-center">
+                <button type="submit" class="btn btn-danger logButton">Se connecter</button>
+             </div>
          </form>
          <?php
             session_start();
