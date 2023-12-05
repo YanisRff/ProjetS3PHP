@@ -1,8 +1,12 @@
 #DoctISEN{
     font-family: 'Just Me Again Down Here', cursive;
     color: white;
+}
+
+#topbar{
     background-color: #ff0000;
     height: 6vh;
+    width: 100%;
 }
 
 #acceuil{
@@ -77,4 +81,8 @@
     width: 60%;
     font-weight: bold;
     text-align: center;
+}
+
+.pointer{
+    cursor: pointer;
 }
