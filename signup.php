@@ -17,7 +17,6 @@
      </p>
  </div>
 
-
  <div class="SignInSecondaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
      <div class="dropdown-menu text-center align-content-center">
          <h5 class="fw-bold">J'ai déjà un compte Doct'ISEN?</h5>
@@ -41,8 +40,8 @@
                  <input type="text" class="form-control" id="FirstName" placeholder="Veuillez mettre votre prénom">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                 <label for="Num" class="form-label">Numéro de téléphone</label>
+                 <input type="tel" pattern="[0-9]{10}" class="form-control" id="Num" placeholder="Numéro de téléphone">
              </div>
              <div class="mb-3">
                  <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
