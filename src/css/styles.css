@@ -70,3 +70,7 @@
 .pointer{
     cursor: pointer;
 }
+
+#searchbar{
+    background-color: #ff0000;
+}
