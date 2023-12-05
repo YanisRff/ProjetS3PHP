@@ -1,5 +1,4 @@
 <?php
-require_once ('../constants.php');
 function dbConnect() //fonction de connexion à la base de données
   {
     try

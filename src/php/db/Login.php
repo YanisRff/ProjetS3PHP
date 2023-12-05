@@ -1,8 +1,4 @@
 <?php
-
-require_once ('../constants.php');
-require_once ('dbconnect.php');
-
 class LoginPatient {
 
     public static function checkMail($pdo,$mail) {
@@ -41,7 +37,4 @@ class LoginPatient {
     }
     
 }
-
-$pdo = dbConnect();
-
 ?>
