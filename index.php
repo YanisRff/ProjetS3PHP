@@ -11,7 +11,7 @@
  </head>
  <body>
     <div id="acceuil">
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
+        <p id="DoctISEN topbar" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
         <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3">
             <button type="button" class="btn btn-light" style="top: 0.4375em;">Vous êtes praticien ?</button>
             <div id="login">
