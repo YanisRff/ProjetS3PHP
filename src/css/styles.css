@@ -90,3 +90,7 @@
 #searchbar{
     background-color: #ff0000;
 }
+
+.gap-6 {
+    gap: 26rem !important;
+}
