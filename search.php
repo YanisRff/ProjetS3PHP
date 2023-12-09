@@ -25,9 +25,26 @@
              </p>
          </div>
          <div class="d-flex flex-row align-items-center gap-3 me-2">
-             <img src="src/img/avatar.png" alt="avatar" id="avatar" style="width: 14.3%; height: auto; border-radius: 50%">
+             <?php
+                //Affichage du gravatar de l'utilisateur (si il en a un)
+                $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'MarlonTheriault@dayrep.com'");
+                $query->execute();
+                $result = $query->fetchAll();
+                foreach ($result as $row) {
+                    echo '<img src="https://www.gravatar.com/avatar/' . md5($row['p_mail']) . '?s=64" alt="avatar" id="avatar" style="width: 14.3%; height: auto; border-radius: 50%">';
+                }
+             ?>
              <div>
-                 <a class="text-white fw-bold mt-3 link-underline-opacity-75-hover link-underline link-underline-opacity-0 link-offset-3-hover link-underline-light">Félix MARQUET</a>
+                 <a class="text-white fw-bold mt-3 link-underline-opacity-75-hover link-underline link-underline-opacity-0 link-offset-3-hover link-underline-light">
+                     <?php
+                            $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'MarlonTheriault@dayrep.com'");
+                            $query->execute();
+                            $result = $query->fetchAll();
+                            foreach ($result as $row) {
+                                echo $row['p_name'] . ' ' . $row['p_surname'];
+                            }
+                     ?>
+                 </a>
              </div>
          </div>
      </div>

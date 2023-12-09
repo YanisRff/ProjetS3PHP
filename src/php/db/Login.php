@@ -24,6 +24,8 @@ class LoginPatient {
 
             if(password_verify($password,$result['p_password'])){
                 echo "Login success";
+                //Garde en mémoire l'adresse mail de l'utilisateur
+                $_SESSION['id'] = $mail;
                 return true;
             } else {
                 echo "Login failed";
@@ -35,7 +37,8 @@ class LoginPatient {
             return false;
         }
     }
-    
+
+
 }
 
 class LoginMedecin {
