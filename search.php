@@ -8,6 +8,14 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="src/css/styles.css">
+     <?php
+         require('src/php/db/dbconnect.php');
+         require('src/php/constants.php');
+         require('src/php/db/Login.php');
+         ini_set('display_errors', 1);
+         error_reporting(E_ALL);
+         $pdo = dbConnect();
+        ?>
  </head>
  <body>
      <div id="topbar" class="d-flex justify-content-between flex-row">
@@ -31,99 +39,39 @@
          </form>
      </div>
      <p class="ms-5 mt-2 fw-bold">
-         6 Résultats
+         <?php
+             $query = $pdo->prepare("SELECT COUNT(*) as count FROM medecin");
+             $query->execute();
+             $result = $query->fetchAll();
+             foreach ($result as $row) {
+                 echo $row['count'] . ' Résultats';
+             }
+         ?>
+
      </p>
      <div class="d-flex flex-row flex-wrap mx-5 gap-5">
-         <div class="card mb-3">
-             <div class="row g-0">
-                 <div class="col-md-4">
-                     <img src="src/img/docteur.png" alt="doctor" class="img-fluid rounded-start">
-                 </div>
-                 <div class="col-md-8">
-                     <div class="card-body">
-                         <h5 class="card-title">Dr. Marc HENOCQ</h5>
-                         <h6 class="card-subtitle mb-2 text-body-secondary">Médecin généraliste</h6>
-                         <p class="card-text">Disponiblilité :</p>
-                         <button type="button" class="btn btn-danger">Prendre rendez-vous</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="card mb-3">
-             <div class="row g-0">
-                 <div class="col-md-4">
-                     <img src="src/img/docteur1.jpg" alt="doctor" class="img-fluid rounded-start" style="max-height: 325px;">
-                 </div>
-                 <div class="col-md-8">
-                     <div class="card-body">
-                         <h5 class="card-title">Dr. Marc HENOCQ</h5>
-                         <h6 class="card-subtitle mb-2 text-body-secondary">Médecin généraliste</h6>
-                         <p class="card-text">Disponiblilité :</p>
-                         <button type="button" class="btn btn-danger">Prendre rendez-vous</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="card mb-3">
-             <div class="row g-0">
-                 <div class="col-md-4">
-                     <img src="src/img/IMG_1713.jpg" alt="doctor" class="img-fluid rounded-start" style="max-height: 325px;">
-                 </div>
-                 <div class="col-md-8">
-                     <div class="card-body">
-                         <h5 class="card-title">Dr. Nirina MACON</h5>
-                         <h6 class="card-subtitle mb-2 text-body-secondary">Médecin généraliste</h6>
-                         <p class="card-text">Disponiblilité :</p>
-                         <button type="button" class="btn btn-danger">Prendre rendez-vous</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="card mb-3">
-             <div class="row g-0">
-                 <div class="col-md-4">
-                     <img src="src/img/docteur1.jpg" alt="doctor" class="img-fluid rounded-start" style="max-height: 325px;">
-                 </div>
-                 <div class="col-md-8">
-                     <div class="card-body">
-                         <h5 class="card-title">Dr. Marc HENOCQ</h5>
-                         <h6 class="card-subtitle mb-2 text-body-secondary">Médecin généraliste</h6>
-                         <p class="card-text">Disponiblilité :</p>
-                         <button type="button" class="btn btn-danger">Prendre rendez-vous</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="card mb-3">
-             <div class="row g-0">
-                 <div class="col-md-4">
-                     <img src="src/img/docteur1.jpg" alt="doctor" class="img-fluid rounded-start" style="max-height: 325px;">
-                 </div>
-                 <div class="col-md-8">
-                     <div class="card-body">
-                         <h5 class="card-title">Dr. Marc HENOCQ</h5>
-                         <h6 class="card-subtitle mb-2 text-body-secondary">Médecin généraliste</h6>
-                         <p class="card-text">Disponiblilité :</p>
-                         <button type="button" class="btn btn-danger">Prendre rendez-vous</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="card mb-3">
-             <div class="row g-0">
-                 <div class="col-md-4">
-                     <img src="src/img/docteur1.jpg" alt="doctor" class="img-fluid rounded-start" style="max-height: 325px;">
-                 </div>
-                 <div class="col-md-8">
-                     <div class="card-body">
-                         <h5 class="card-title">Dr. Marc HENOCQ</h5>
-                         <h6 class="card-subtitle mb-2 text-body-secondary">Médecin généraliste</h6>
-                         <p class="card-text">Disponiblilité :</p>
-                         <button type="button" class="btn btn-danger">Prendre rendez-vous</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
+         <?php
+            $query = $pdo->prepare("SELECT * FROM medecin");
+            $query->execute();
+            $result = $query->fetchAll();
+            foreach($result as $row){
+                echo '<div class="card mb-3">';
+                echo '<div class="row g-0">';
+                echo '<div class="col-md-4">';
+                echo '<img src="https://thispersondoesnotexist.com/" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
+                echo '</div>';
+                echo '<div class="col-md-8">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
+                echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
+                echo '<p class="card-text">Disponiblilité :</p>';
+                echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+         ?>
      </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </body>
