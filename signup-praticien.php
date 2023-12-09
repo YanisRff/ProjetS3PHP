@@ -63,7 +63,7 @@
                  <label for="codePostal" class="form-label">Code Postal</label>
                  <input type="text" pattern="[0-9]{5}" class="form-control" id="codePostal" placeholder="Code Postal">
              </div>
-             <div class="m-3">
+             <div class="mb-3">
                  <label for="specialite" class="form-label">Spécialité</label>
                  <input type="text" class="form-control" id="specialite" placeholder="Spécialité">
              </div>

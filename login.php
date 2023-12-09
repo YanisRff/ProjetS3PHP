@@ -25,49 +25,50 @@
      </p>
  </div>
 
- <div class="loginPrimaryCard p-3 m-0 border-0 bd-example m-0 border-0">
-     <div class="loginInsideCard dropdown-menu">
-         <h5 class="text-center fw-bold">J'ai déjà un compte Doct'ISEN</h5>
-         <form class="px-4 py-3" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-             <div>
-             <div class="mb-3">
-                 <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="mail">
-             </div>
-             <div class="mb-3">
-                 <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
-             </div>
-             </div>
-             <div class="text-center justify-content-center">
-                <button type="submit" class="btn btn-danger logButton">Se connecter</button>
-             </div>
-         </form>
-         <?php
-            session_start();
-            if(!empty($_POST['mail']) && !empty($_POST['password'])){
-                $mail = ($_POST["mail"]);
-                $password = ($_POST["password"]);
-                if(LoginPatient::Login($pdo,$mail,$password)){
-                    error_log("Login success");
-                    $_SESSION['id'] = $mail;    
-                    echo '<meta http-equiv="refresh" content="0;url=index.php">';
-                //echo 'Connexion réussie';
-                } else {
-                    error_log('Erreur de connexion');
+ <div class="h-100 d-flex flex-column gap-0 justify-content-center text-center w-50 mx-6">
+     <div class="p-3 m-0 border-0 bd-example m-0 border-0">
+         <div class="loginInsideCard dropdown-menu">
+             <h5 class="text-center fw-bold">J'ai déjà un compte Doct'ISEN</h5>
+             <form class="px-4 py-3" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                 <div>
+                 <div class="mb-3">
+                     <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                     <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="mail">
+                 </div>
+                 <div class="mb-3">
+                     <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                     <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+                 </div>
+                 </div>
+                 <div class="text-center justify-content-center">
+                    <button type="submit" class="btn btn-danger logButton">Se connecter</button>
+                 </div>
+             </form>
+             <?php
+                session_start();
+                if(!empty($_POST['mail']) && !empty($_POST['password'])){
+                    $mail = ($_POST["mail"]);
+                    $password = ($_POST["password"]);
+                    if(LoginPatient::Login($pdo,$mail,$password)){
+                        error_log("Login success");
+                        $_SESSION['id'] = $mail;
+                        echo '<meta http-equiv="refresh" content="0;url=index.php">';
+                    //echo 'Connexion réussie';
+                    } else {
+                        error_log('Erreur de connexion');
+                }
             }
-        }
-    ?>
+        ?>
+         </div>
+     </div>
+     <div class="p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
+        <div class="dropdown-menu text-center align-content-center">
+            <h5 class="fw-bold">Nouveau sur Doct'ISEN?</h5>
+            <a href="signup.php" class="">
+                <button class="btn btn-danger logButton">S'inscrire</button>
+            </a>
+         </div>
      </div>
  </div>
- <div class="loginSecondaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
-    <div class="dropdown-menu text-center align-content-center">
-        <h5 class="fw-bold">Nouveau sur Doct'ISEN?</h5>
-        <a href="signup.php" class="">
-            <button class="btn btn-danger logButton">S'inscrire</button>
-        </a>
-     </div>
- </div>
-
  </body>
 </html>

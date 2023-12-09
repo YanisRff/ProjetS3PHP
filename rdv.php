@@ -135,7 +135,7 @@
                 <form class="input-group mt-5" method="post">
                     <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
                     <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
-                    <button class="btn btn-danger" type="submit" id="button-addon2">Rechercher</button>
+                    <button class="btn btn-danger me-3" type="submit" id="button-addon2">Rechercher</button>
                 </form>
             </div>
         </div>
