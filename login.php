@@ -53,7 +53,6 @@
                         error_log("Login success");
                         $_SESSION['id'] = $mail;
                         echo '<meta http-equiv="refresh" content="0;url=index.php">';
-                    //echo 'Connexion réussie';
                     } else {
                         error_log('Erreur de connexion');
                 }

@@ -13,4 +13,12 @@ function dbConnect() //fonction de connexion à la base de données
     }
     return $db;
   }
+
+  function console_log($data)
+  {
+      //Console Log comme en JS
+        echo '<script>';
+        echo 'console.log('. json_encode( $data ) .')';
+        echo '</script>';
+  }
 ?>

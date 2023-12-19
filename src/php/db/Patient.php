@@ -10,12 +10,14 @@ class Patient {
     }
 
     public static function GetRDV($pdo,$mail){
-        $query = $pdo->prepare("SELECT * FROM rdv WHERE p_mail = :mail");
+        $query = $pdo->prepare("SELECT * FROM rendez_vous WHERE p_mail = :mail");
         $query->bindParam(':mail', $mail);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
 
     }
+
+
 }
 ?>
