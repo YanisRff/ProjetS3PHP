@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
+<?php
+require('src/php/db/dbconnect.php');
+require('src/php/constants.php');
+require('src/php/db/Signup.php');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+$pdo = dbConnect();
+?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
      <p id="DoctISEN" class="w-100 top-0 start-0" style="font-size: 36px">
@@ -29,7 +37,7 @@
  <div class="SignInPrimaryCard p-3 border-0 bd-example border-0 text-center justify-content-center">
      <div class="loginInsideCard dropdown-menu">
          <h5 class="text-center fw-bold">Nouveau praticien sur Doct'ISEN ?</h5>
-         <form class="px-4 py-3">
+         <form class="px-4 py-3" method="post">
              <div class="align-content-center">
              <div class="mb-3">
                  <label for="Name" class="form-label align-baseline">Nom</label>
@@ -63,7 +71,7 @@
                  <label for="codePostal" class="form-label">Code Postal</label>
                  <input type="text" pattern="[0-9]{5}" class="form-control" id="codePostal" placeholder="Code Postal">
              </div>
-             <div class="m-3">
+             <div class="mb-3">
                  <label for="specialite" class="form-label">Spécialité</label>
                  <input type="text" class="form-control" id="specialite" placeholder="Spécialité">
              </div>
@@ -71,6 +79,27 @@
                  <button type="submit" class="btn btn-danger logButton">Se connecter</button>
              </div>
          </form>
+         <?php
+            session_start();
+            if(!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['phone']) && !empty($_POST['password']) && !empty($_POST['passwordConfirmation']) && !empty($_POST['mailConfirmation']) && !empty($_POST['codePostal']) && !empty($_POST['specialite'])){
+                $mail = ($_POST["mail"]);
+                $password = ($_POST["password"]);
+                $name = ($_POST["name"]);
+                $surname = ($_POST["surname"]);
+                $phone = ($_POST["phone"]);
+                $passwordConfirmation = ($_POST["passwordConfirmation"]);
+                $mailConfirmation = ($_POST["mailConfirmation"]);
+                $codePostal = ($_POST["codePostal"]);
+                $specialite = ($_POST["specialite"]);
+                if($password == $passwordConfirmation && $mail == $mailConfirmation){
+                    $query = $pdo->prepare("INSERT INTO medecin (m_name, m_surname, m_mail, m_password, m_phone, m_specialty, m_postal_code) VALUES ('$name', '$surname', '$mail', '$password', '$phone', '$specialite', '$codePostal')");
+                    $query->execute();
+                    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+                } else {
+                    echo '<p class="text-danger">Les mots de passe ou les adresses mails ne correspondent pas</p>';
+                }
+            }
+         ?>
      </div>
  </div>
 

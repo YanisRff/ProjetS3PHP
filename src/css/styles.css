@@ -92,3 +92,17 @@
 .ms-6{
 margin-left: 6rem !important;
 }
+
+.mx-6{
+    margin-left: 24rem !important;
+    margin-right: 24rem !important;
+}
+
+.thumbnail{
+    max-width: 100%;
+    height: auto;
+}
+
+.cardImg{
+    width: 17%;
+}

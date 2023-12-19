@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
+<?php
+require('src/php/db/dbconnect.php');
+require('src/php/constants.php');
+require('src/php/db/Signup.php');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+$pdo = dbConnect();
+?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
      <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
@@ -29,40 +37,60 @@
  <div class="SignInPrimaryCard p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center">
      <div class="loginInsideCard dropdown-menu">
          <h5 class="text-center fw-bold">Nouveau sur Doct'ISEN ?</h5>
-         <form class="px-4 py-3">
+         <form class="px-4 py-3" method="post">
              <div class="align-content-center">
              <div class="mb-3">
                  <label for="Name" class="form-label align-baseline">Nom</label>
-                 <input type="text" class="form-control" id="Name" placeholder="Veuillez mettre votre nom">
+                 <input type="text" class="form-control" id="Name" name="name" placeholder="Veuillez mettre votre nom">
              </div>
              <div class="mb-3">
                  <label for="FirstName" class="form-label">Prénom</label>
-                 <input type="text" class="form-control" id="FirstName" placeholder="Veuillez mettre votre prénom">
+                 <input type="text" class="form-control" id="FirstName" name="surname" placeholder="Veuillez mettre votre prénom">
              </div>
              <div class="mb-3">
                  <label for="Num" class="form-label">Numéro de téléphone</label>
-                 <input type="tel" pattern="[0-9]{10}" class="form-control" id="Num" placeholder="Numéro de téléphone">
+                 <input type="tel" pattern="[0-9]{10}" class="form-control" id="Num" name="phone" placeholder="Numéro de téléphone">
              </div>
              <div class="mb-3">
                  <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                 <input type="email" class="form-control" id="exampleDropdownFormEmail1" name="mail" placeholder="email@example.com">
              </div>
              <div class="mb-3">
                  <label for="exampleDropdownFormEmailConfirmation1" class="form-label">Email address confirmation</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmailConfirmation1" placeholder="email@example.com">
+                 <input type="email" class="form-control" id="exampleDropdownFormEmailConfirmation1" name="mailConfirmation" placeholder="email@example.com">
              </div>
              <div class="mb-3">
                  <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="Password">
              </div>
              <div class="mb-3">
                  <label for="exampleDropdownFormPasswordConfirmation1" class="form-label">Password Confirmation</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPasswordConfirmation1" placeholder="Password">
+                 <input type="password" class="form-control" id="exampleDropdownFormPasswordConfirmation1" name="passwordConfirmation" placeholder="Password">
              </div>
              <div class="align-content-center text-center ">
                  <button type="submit" class="btn btn-danger logButton">Se connecter</button>
              </div>
          </form>
+         <?php
+         session_start();
+         if(!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['phone']) && !empty($_POST['password']) && !empty($_POST['passwordConfirmation']) && !empty($_POST['mailConfirmation'])){
+             $mail = ($_POST["mail"]);
+             $password = ($_POST["password"]);
+             $name = ($_POST["name"]);
+             $surname = ($_POST["surname"]);
+             $phone = ($_POST["phone"]);
+             if(SignupPatient::Insert($pdo,$name,$surname,$mail,$password,$phone)){
+                 error_log("Signup success");
+                 $_SESSION['id'] = $mail;
+                 echo '<meta http-equiv="refresh" content="0;url=index.php">';
+             } else {
+                 error_log('Erreur de connexion');
+             }
+         }
+         else{
+             error_log('Erreur de connexion');
+         }
+         ?>
      </div>
  </div>
 
