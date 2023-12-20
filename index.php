@@ -21,9 +21,9 @@
         </div>
         <div id="rdv">
             <p class="text-white fw-bold fs-3">Trouvez un rendez vous avec un medecin</p>
-            <form class="input-group" method="post">
-                <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
-                <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
+            <form action="search.php" class="input-group" method="post">
+                <input type="text" aria-label="First name" class="form-control" id="nom" name="nom" placeholder="Nom, spécialité">
+                <input type="text" aria-label="Last name" class="form-control" id="postal" name="postal" placeholder="Où ?">
                 <button class="btn btn-success" type="submit" id="button-addon2">Rechercher</button>
             </form>
         </div>

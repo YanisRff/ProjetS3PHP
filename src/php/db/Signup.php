@@ -3,7 +3,6 @@
 class SignupPatient
 {
     public static function Insert($pdo,$name,$surname,$mail,$password,$phone){
-        error_log($password);
         $password = password_hash($password, PASSWORD_ARGON2ID);
         $query = $pdo->prepare("INSERT INTO patient (p_name,p_surname,p_mail,p_password,p_phone) VALUES (:name,:surname,:mail,:password,:phone)");
         $query->bindParam(':name', $name);
@@ -17,7 +16,6 @@ class SignupPatient
         $query->bindParam(':mail', $mail);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        error_log($result);
         if ($result['count'] == 0) {
             return false;
         } else {
@@ -31,8 +29,7 @@ class SignupMedecin
 {
     public static function insertMedecin($pdo,$name,$surname,$mail,$password,$specialite,$phone,$postal) {
         $password = password_hash($password, PASSWORD_ARGON2ID);
-        console_log($password);
-        $query = $pdo->prepare("INSERT INTO medecin (m_name,m_surname,m_mail,m_password,m_specialty, m_phone, m_postal) VALUES (:name,:surname,:mail,:password,:specialite,:phone,:postal)");
+        $query = $pdo->prepare("INSERT INTO medecin (m_name,m_surname,m_mail,m_password,m_specialty,m_phone,m_postal) VALUES (:name,:surname,:mail,:password,:specialite,:phone,:postal)");
         $query->bindParam(':name', $name);
         $query->bindParam(':surname', $surname);
         $query->bindParam(':mail', $mail);
@@ -46,7 +43,6 @@ class SignupMedecin
         $query->bindParam(':mail', $mail);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        console_log($result);
         if ($result['count'] == 0) {
             return false;
         } else {
