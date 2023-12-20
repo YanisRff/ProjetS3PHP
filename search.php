@@ -11,6 +11,7 @@
      <?php
         require('src/php/db/dbconnect.php');
         require('src/php/constants.php');
+        require ('src/php/db/Search.php');
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
         $pdo = dbConnect();
@@ -57,138 +58,7 @@
          </form>
      </div>
      <?php
-        if($_POST['postal'] == null){
-            $query = $pdo->prepare("SELECT * FROM medecin WHERE m_name = :nom");
-            $query->bindParam(':nom', $_POST['nom']);
-            $query->execute();
-            $result = $query->fetchAll();
-
-            if($result == null){
-                $query = $pdo->prepare("SELECT * FROM medecin WHERE m_specialty = :specialite");
-                $query->bindParam(':specialite', $_POST['nom']);
-                $query->execute();
-                $result = $query->fetchAll();
-            }
-
-            $count = 0;
-            foreach($result as $row){
-                $count++;
-            }
-
-            echo '<p class="ms-5 mt-2 fw-bold">'.$count.' Résultats</p>';
-
-            if($count == 0){
-                echo '<p class="ms-5 mt-2 fw-bold">Aucun résultat</p>';
-            }
-            else{
-                echo '<div class="d-flex flex-row flex-wrap mx-5 gap-5">';
-                foreach($result as $row){
-                    echo '<div class="card mb-3">';
-                    echo '<div class="row g-0">';
-                    echo '<div class="col-md-4">';
-                    $imageUrl = 'https://thispersondoesnotexist.com';
-                    echo '<img src="' . $imageUrl . '" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
-                    echo '</div>';
-                    echo '<div class="col-md-8">';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
-                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
-                    echo '<p class="card-text">Disponiblilité :</p>';
-                    echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-                echo '</div>';
-            }
-        }
-        else if($_POST['nom'] == null){
-            $query = $pdo->prepare("SELECT * FROM medecin WHERE m_postal = :postal");
-            $query->bindParam(':postal', $_POST['postal']);
-            $query->execute();
-            $result = $query->fetchAll();
-
-            $count = 0;
-            foreach($result as $row){
-                $count++;
-            }
-
-            echo '<p class="ms-5 mt-2 fw-bold">'.$count.' Résultats</p>';
-
-            if($count == 0){
-                echo '<p class="ms-5 mt-2 fw-bold">Aucun résultat</p>';
-            }
-            else{
-                echo '<div class="d-flex flex-row flex-wrap mx-5 gap-5">';
-                foreach($result as $row){
-                    echo '<div class="card mb-3">';
-                    echo '<div class="row g-0">';
-                    echo '<div class="col-md-4">';
-                    $imageUrl = 'https://thispersondoesnotexist.com';
-                    echo '<img src="' . $imageUrl . '" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
-                    echo '</div>';
-                    echo '<div class="col-md-8">';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
-                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
-                    echo '<p class="card-text">Disponiblilité :</p>';
-                    echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-                echo '</div>';
-            }
-        }
-        else {
-            $query = $pdo->prepare("SELECT * FROM medecin WHERE m_name = :nom AND m_postal = :postal");
-            $query->bindParam(':nom', $_POST['nom']);
-            $query->bindParam(':postal', $_POST['postal']);
-            $query->execute();
-            $result = $query->fetchAll();
-
-            if ($result == null) {
-                $query = $pdo->prepare("SELECT * FROM medecin WHERE m_specialty = :specialite AND m_postal = :postal");
-                $query->bindParam(':specialite', $_POST['nom']);
-                $query->bindParam(':postal', $_POST['postal']);
-                $query->execute();
-                $result = $query->fetchAll();
-            }
-
-            $count = 0;
-            foreach ($result as $row) {
-                $count++;
-            }
-
-            echo '<p class="ms-5 mt-2 fw-bold">' . $count . ' Résultats</p>';
-
-            if ($count == 0) {
-                echo '<p class="ms-5 mt-2 fw-bold">Aucun résultat</p>';
-            } else {
-                echo '<div class="d-flex flex-row flex-wrap mx-5 gap-5">';
-                foreach ($result as $row) {
-                    echo '<div class="card mb-3">';
-                    echo '<div class="row g-0">';
-                    echo '<div class="col-md-4">';
-                    $imageUrl = 'https://thispersondoesnotexist.com';
-                    echo '<img src="' . $imageUrl . '" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
-                    echo '</div>';
-                    echo '<div class="col-md-8">';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . $row['m_name'] . ' ' . $row['m_surname'] . '</h5>';
-                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">' . $row['m_specialty'] . '</h6>';
-                    echo '<p class="card-text">Disponiblilité :</p>';
-                    echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-                echo '</div>';
-            }
-        }
+        search($pdo, $_POST['nom'], $_POST['postal']);
      ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </body>
