@@ -19,9 +19,11 @@
  <body>
      <div id="topbar" class="d-flex justify-content-between flex-row">
          <div>
-             <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
-                 Doct'ISEN
-             </p>
+             <a href="index.php">
+                 <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+                     Doct'ISEN
+                 </p>
+             </a>
          </div>
          <div class="d-flex flex-row align-items-center gap-3 me-2">
              <?php

@@ -11,7 +11,11 @@
  </head>
  <body>
     <div id="acceuil">
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
+        <a href="index.php">
+            <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+                Doct'ISEN
+            </p>
+        </a>
         <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3 mt-2">
             <a href="login-praticien.php"> <button type="button" class="btn btn-danger" style="top: 0.4375em;">Vous êtes praticien ?</button> </a>
             <a href="login.php"> <button type="button" class="btn btn-danger" style="top: 0.4375em;">Se connecter</button></a>

@@ -21,9 +21,11 @@ session_start();
 ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
-     <p id="DoctISEN" class="w-100 top-0 start-0" style="font-size: 36px">
-         Doct'ISEN
-     </p>
+     <a href="index.php">
+         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+             Doct'ISEN
+         </p>
+     </a>
  </div>
 
  <div class="signInSecondaryCard p-3 border-0 bd-example text-center justify-content-center">
