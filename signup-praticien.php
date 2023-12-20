@@ -17,12 +17,15 @@ require('src/php/db/Signup.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $pdo = dbConnect();
+session_start();
 ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
-     <p id="DoctISEN" class="w-100 top-0 start-0" style="font-size: 36px">
-         Doct'ISEN
-     </p>
+     <a href="index.php">
+         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+             Doct'ISEN
+         </p>
+     </a>
  </div>
 
  <div class="signInSecondaryCard p-3 border-0 bd-example text-center justify-content-center">
@@ -40,64 +43,64 @@ $pdo = dbConnect();
          <form class="px-4 py-3" method="post">
              <div class="align-content-center">
              <div class="mb-3">
-                 <label for="Name" class="form-label align-baseline">Nom</label>
-                 <input type="text" class="form-control" id="Name" placeholder="Veuillez mettre votre nom">
+                 <label for="name" class="form-label align-baseline">Nom</label>
+                 <input type="text" class="form-control" id="name" name="name" placeholder="Veuillez mettre votre nom">
              </div>
              <div class="mb-3">
-                 <label for="FirstName" class="form-label">Prénom</label>
-                 <input type="text" class="form-control" id="FirstName" placeholder="Veuillez mettre votre prénom">
+                 <label for="surname" class="form-label">Prénom</label>
+                 <input type="text" class="form-control" id="surname" name="surname" placeholder="Veuillez mettre votre prénom">
              </div>
              <div class="mb-3">
-                 <label for="Num" class="form-label">Numéro de téléphone</label>
-                 <input type="tel" pattern="[0-9]{10}" class="form-control" id="Num" placeholder="Numéro de téléphone">
+                 <label for="phone" class="form-label">Numéro de téléphone</label>
+                 <input type="tel" pattern="[0-9]{10}" class="form-control" id="phone" name="phone" placeholder="Numéro de téléphone">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                 <label for="mail" class="form-label">Email address</label>
+                 <input type="email" class="form-control" id="mail" name="mail" placeholder="email@example.com">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormEmailConfirmation1" class="form-label">Email address confirmation</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmailConfirmation1" placeholder="email@example.com">
+                 <label for="mailConfirmation" class="form-label">Email address confirmation</label>
+                 <input type="email" class="form-control" id="mailConfirmation" name="mailConfirmation" placeholder="email@example.com">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                 <label for="password" class="form-label">Password</label>
+                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormPasswordConfirmation1" class="form-label">Password Confirmation</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPasswordConfirmation1" placeholder="Password">
+                 <label for="passwordConfirmation" class="form-label">Password Confirmation</label>
+                 <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation" placeholder="Password">
              </div>
              <div class="mb-3">
                  <label for="codePostal" class="form-label">Code Postal</label>
-                 <input type="text" pattern="[0-9]{5}" class="form-control" id="codePostal" placeholder="Code Postal">
+                 <input type="text" pattern="[0-9]{5}" class="form-control" id="codePostal" name="codePostal" placeholder="Code Postal">
              </div>
              <div class="mb-3">
                  <label for="specialite" class="form-label">Spécialité</label>
-                 <input type="text" class="form-control" id="specialite" placeholder="Spécialité">
+                 <input type="text" class="form-control" id="specialite" name="specialite" placeholder="Spécialité">
              </div>
              <div class="align-content-center text-center ">
                  <button type="submit" class="btn btn-danger logButton">Se connecter</button>
              </div>
          </form>
          <?php
-            session_start();
             if(!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['phone']) && !empty($_POST['password']) && !empty($_POST['passwordConfirmation']) && !empty($_POST['mailConfirmation']) && !empty($_POST['codePostal']) && !empty($_POST['specialite'])){
                 $mail = ($_POST["mail"]);
                 $password = ($_POST["password"]);
                 $name = ($_POST["name"]);
                 $surname = ($_POST["surname"]);
                 $phone = ($_POST["phone"]);
-                $passwordConfirmation = ($_POST["passwordConfirmation"]);
-                $mailConfirmation = ($_POST["mailConfirmation"]);
                 $codePostal = ($_POST["codePostal"]);
                 $specialite = ($_POST["specialite"]);
-                if($password == $passwordConfirmation && $mail == $mailConfirmation){
-                    $query = $pdo->prepare("INSERT INTO medecin (m_name, m_surname, m_mail, m_password, m_phone, m_specialty, m_postal_code) VALUES ('$name', '$surname', '$mail', '$password', '$phone', '$specialite', '$codePostal')");
-                    $query->execute();
+                if(SignupMedecin::insertMedecin($pdo,$name,$surname,$mail, $password,$specialite,$phone,$codePostal)){
+                    error_log("Signup success");
+                    $_SESSION['id'] = $mail;
                     echo '<meta http-equiv="refresh" content="0;url=index.php">';
                 } else {
-                    echo '<p class="text-danger">Les mots de passe ou les adresses mails ne correspondent pas</p>';
+                    error_log("Erreur d'inscription");
                 }
+            }
+            else{
+                error_log("Un champ n'est pas rempli");
             }
          ?>
      </div>

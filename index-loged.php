@@ -11,7 +11,11 @@
 </head>
 <body>
 <div id="acceuil">
-    <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
+    <a href="index.php">
+        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+            Doct'ISEN
+        </p>
+    </a>
     <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3">
         <div class="d-flex flex-row align-items-center gap-3 me-2">
             <img src="src/img/avatar.png" alt="avatar" id="avatar" style="width: 14.3%; height: auto; border-radius: 50%">

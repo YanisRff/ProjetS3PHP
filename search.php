@@ -9,20 +9,21 @@
    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="src/css/styles.css">
      <?php
-         require('src/php/db/dbconnect.php');
-         require('src/php/constants.php');
-         require('src/php/db/Login.php');
-         ini_set('display_errors', 1);
-         error_reporting(E_ALL);
-         $pdo = dbConnect();
-        ?>
+        require('src/php/db/dbconnect.php');
+        require('src/php/constants.php');
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+        $pdo = dbConnect();
+     ?>
  </head>
  <body>
      <div id="topbar" class="d-flex justify-content-between flex-row">
          <div>
-             <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
-                 Doct'ISEN
-             </p>
+             <a href="index.php">
+                 <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+                     Doct'ISEN
+                 </p>
+             </a>
          </div>
          <div class="d-flex flex-row align-items-center gap-3 me-2">
              <?php
@@ -49,47 +50,146 @@
          </div>
      </div>
      <div id="searchbar">
-         <form class="input-group p-5" method="post">
-             <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
-             <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
+         <form class="input-group p-5" action="search.php" method="post">
+             <input type="text" aria-label="First name" class="form-control" id="nom" name="nom" placeholder="Nom, spécialité">
+             <input type="text" aria-label="Last name" class="form-control" id="postal" name="postal" placeholder="Où ?">
              <button class="btn btn-danger" type="submit" id="button-addon2">Rechercher</button>
          </form>
      </div>
-     <p class="ms-5 mt-2 fw-bold">
-         <?php
-             $query = $pdo->prepare("SELECT COUNT(*) as count FROM medecin");
-             $query->execute();
-             $result = $query->fetchAll();
-             foreach ($result as $row) {
-                 echo $row['count'] . ' Résultats';
-             }
-         ?>
-
-     </p>
-     <div class="d-flex flex-row flex-wrap mx-5 gap-5">
-         <?php
-            $query = $pdo->prepare("SELECT * FROM medecin");
+     <?php
+        if($_POST['postal'] == null){
+            $query = $pdo->prepare("SELECT * FROM medecin WHERE m_name = :nom");
+            $query->bindParam(':nom', $_POST['nom']);
             $query->execute();
             $result = $query->fetchAll();
+
+            if($result == null){
+                $query = $pdo->prepare("SELECT * FROM medecin WHERE m_specialty = :specialite");
+                $query->bindParam(':specialite', $_POST['nom']);
+                $query->execute();
+                $result = $query->fetchAll();
+            }
+
+            $count = 0;
             foreach($result as $row){
-                echo '<div class="card mb-3">';
-                echo '<div class="row g-0">';
-                echo '<div class="col-md-4">';
-                echo '<img src="https://thispersondoesnotexist.com/" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
-                echo '</div>';
-                echo '<div class="col-md-8">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
-                echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
-                echo '<p class="card-text">Disponiblilité :</p>';
-                echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
+                $count++;
+            }
+
+            echo '<p class="ms-5 mt-2 fw-bold">'.$count.' Résultats</p>';
+
+            if($count == 0){
+                echo '<p class="ms-5 mt-2 fw-bold">Aucun résultat</p>';
+            }
+            else{
+                echo '<div class="d-flex flex-row flex-wrap mx-5 gap-5">';
+                foreach($result as $row){
+                    echo '<div class="card mb-3">';
+                    echo '<div class="row g-0">';
+                    echo '<div class="col-md-4">';
+                    $imageUrl = 'https://thispersondoesnotexist.com';
+                    echo '<img src="' . $imageUrl . '" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
+                    echo '</div>';
+                    echo '<div class="col-md-8">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
+                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
+                    echo '<p class="card-text">Disponiblilité :</p>';
+                    echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
                 echo '</div>';
             }
-         ?>
-     </div>
+        }
+        else if($_POST['nom'] == null){
+            $query = $pdo->prepare("SELECT * FROM medecin WHERE m_postal = :postal");
+            $query->bindParam(':postal', $_POST['postal']);
+            $query->execute();
+            $result = $query->fetchAll();
+
+            $count = 0;
+            foreach($result as $row){
+                $count++;
+            }
+
+            echo '<p class="ms-5 mt-2 fw-bold">'.$count.' Résultats</p>';
+
+            if($count == 0){
+                echo '<p class="ms-5 mt-2 fw-bold">Aucun résultat</p>';
+            }
+            else{
+                echo '<div class="d-flex flex-row flex-wrap mx-5 gap-5">';
+                foreach($result as $row){
+                    echo '<div class="card mb-3">';
+                    echo '<div class="row g-0">';
+                    echo '<div class="col-md-4">';
+                    $imageUrl = 'https://thispersondoesnotexist.com';
+                    echo '<img src="' . $imageUrl . '" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
+                    echo '</div>';
+                    echo '<div class="col-md-8">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
+                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
+                    echo '<p class="card-text">Disponiblilité :</p>';
+                    echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+        }
+        else {
+            $query = $pdo->prepare("SELECT * FROM medecin WHERE m_name = :nom AND m_postal = :postal");
+            $query->bindParam(':nom', $_POST['nom']);
+            $query->bindParam(':postal', $_POST['postal']);
+            $query->execute();
+            $result = $query->fetchAll();
+
+            if ($result == null) {
+                $query = $pdo->prepare("SELECT * FROM medecin WHERE m_specialty = :specialite AND m_postal = :postal");
+                $query->bindParam(':specialite', $_POST['nom']);
+                $query->bindParam(':postal', $_POST['postal']);
+                $query->execute();
+                $result = $query->fetchAll();
+            }
+
+            $count = 0;
+            foreach ($result as $row) {
+                $count++;
+            }
+
+            echo '<p class="ms-5 mt-2 fw-bold">' . $count . ' Résultats</p>';
+
+            if ($count == 0) {
+                echo '<p class="ms-5 mt-2 fw-bold">Aucun résultat</p>';
+            } else {
+                echo '<div class="d-flex flex-row flex-wrap mx-5 gap-5">';
+                foreach ($result as $row) {
+                    echo '<div class="card mb-3">';
+                    echo '<div class="row g-0">';
+                    echo '<div class="col-md-4">';
+                    $imageUrl = 'https://thispersondoesnotexist.com';
+                    echo '<img src="' . $imageUrl . '" alt="doctor" class="img-fluid rounded-start" width="300" height="300">';
+                    echo '</div>';
+                    echo '<div class="col-md-8">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $row['m_name'] . ' ' . $row['m_surname'] . '</h5>';
+                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">' . $row['m_specialty'] . '</h6>';
+                    echo '<p class="card-text">Disponiblilité :</p>';
+                    echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                echo '</div>';
+            }
+        }
+     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
  </body>
 </html>

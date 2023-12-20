@@ -11,19 +11,21 @@
  </head>
  <body>
     <div id="acceuil">
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">Doct'ISEN</p>
+        <a href="index.php">
+            <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+                Doct'ISEN
+            </p>
+        </a>
         <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3 mt-2">
-            <a href="login-praticien.php"> <button type="button" class="btn btn-light" style="top: 0.4375em;">Vous êtes praticien ?</button> </a>
-            <div id="login">
-                <p class="text-white fw-bold">Se connecter</p>
-            </div>
+            <a href="login-praticien.php"> <button type="button" class="btn btn-danger" style="top: 0.4375em;">Vous êtes praticien ?</button> </a>
+            <a href="login.php"> <button type="button" class="btn btn-danger" style="top: 0.4375em;">Se connecter</button></a>
             <p>   </p>
         </div>
         <div id="rdv">
             <p class="text-white fw-bold fs-3">Trouvez un rendez vous avec un medecin</p>
-            <form class="input-group" method="post">
-                <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
-                <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
+            <form action="search.php" class="input-group" method="post">
+                <input type="text" aria-label="First name" class="form-control" id="nom" name="nom" placeholder="Nom, spécialité">
+                <input type="text" aria-label="Last name" class="form-control" id="postal" name="postal" placeholder="Où ?">
                 <button class="btn btn-success" type="submit" id="button-addon2">Rechercher</button>
             </form>
         </div>

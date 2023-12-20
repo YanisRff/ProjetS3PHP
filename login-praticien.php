@@ -20,9 +20,11 @@
  ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
-     <p id="DoctISEN" class="w-100" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
-         Doct'ISEN
-     </p>
+     <a href="index.php">
+         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+             Doct'ISEN
+         </p>
+     </a>
  </div>
 
  <div class="h-100 d-flex flex-column gap-0 justify-content-center text-center w-50 mx-6">
