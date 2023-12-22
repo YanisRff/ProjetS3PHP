@@ -37,7 +37,11 @@ function search($pdo, $nom, $postal){
                 echo '<h5 class="card-title">'.$row['m_name'].' '.$row['m_surname'].'</h5>';
                 echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['m_specialty'].'</h6>';
                 echo '<p class="card-text">Disponiblilité :</p>';
-                echo '<button type="button" class="btn btn-danger">Prendre rendez-vous</button>';
+                echo '<form method="post" action="../../../calendrier.php">';
+                echo '<input type="hidden" name="id" id="id" value="'.$row['m_id'].'">';
+                echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
+                echo '<button type="submit" class="btn btn-danger">Prendre rendez-vous</button>';
+                echo '</form>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
