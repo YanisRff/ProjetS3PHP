@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="src/js/signup.js" defer></script>
 </head>
 <?php
 require('src/php/db/dbconnect.php');
@@ -22,7 +23,7 @@ session_start();
  <body style="background-color: #EEF2F7">
  <div id="topbar">
      <a href="index.php">
-         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+         <p id="DoctISEN" class="top-0">
              Doct'ISEN
          </p>
      </a>
@@ -61,6 +62,7 @@ session_start();
              <div class="mb-3">
                  <label for="mailConfirmation" class="form-label">Email address confirmation</label>
                  <input type="email" class="form-control" id="mailConfirmation" name="mailConfirmation" placeholder="email@example.com">
+                 <p class="text-danger fw-bold" id="mail-error"></p>
              </div>
              <div class="mb-3">
                  <label for="password" class="form-label">Password</label>
@@ -69,6 +71,7 @@ session_start();
              <div class="mb-3">
                  <label for="passwordConfirmation" class="form-label">Password Confirmation</label>
                  <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation" placeholder="Password">
+                 <p class="text-danger fw-bold" id="password-error"></p>
              </div>
              <div class="mb-3">
                  <label for="codePostal" class="form-label">Code Postal</label>
@@ -79,7 +82,7 @@ session_start();
                  <input type="text" class="form-control" id="specialite" name="specialite" placeholder="Spécialité">
              </div>
              <div class="align-content-center text-center ">
-                 <button type="submit" class="btn btn-danger logButton">Se connecter</button>
+                 <button type="submit" class="btn btn-danger logButton disabled" id="signupButton">Se connecter</button>
              </div>
          </form>
          <?php
