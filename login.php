@@ -17,6 +17,7 @@
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
         $pdo = dbConnect();
+        session_start();
  ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
@@ -46,8 +47,12 @@
                     <button type="submit" class="btn btn-danger logButton">Se connecter</button>
                  </div>
              </form>
+             <div class="text-center justify-content-center">
+                 <a href="forgotPassword.php" class="text-center justify-content-center">
+                     <p class="text-center justify-content-center">Mot de passe oublié ?</p>
+                 </a>
+             </div>
              <?php
-                session_start();
                 if(!empty($_POST['mail']) && !empty($_POST['password'])){
                     $mail = ($_POST["mail"]);
                     $password = ($_POST["password"]);
