@@ -21,7 +21,7 @@ $pdo = dbConnect();
 <body style="background-color: #EEF2F7">
 <div id="topbar">
     <a href="index.php">
-        <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+        <p id="DoctISEN" class="top-0">
             Doct'ISEN
         </p>
     </a>
