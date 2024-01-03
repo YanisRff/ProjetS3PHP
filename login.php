@@ -18,7 +18,6 @@
         error_reporting(E_ALL);
         session_start();
         $pdo = dbConnect();
-        session_start();
  ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
