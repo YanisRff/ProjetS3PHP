@@ -21,7 +21,7 @@
     <div id="topbar" class="d-flex justify-content-between flex-row">
         <div>
             <a href="index.php">
-                <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+                <p id="DoctISEN" class="top-0">
                     Doct'ISEN
                 </p>
             </a>
@@ -162,9 +162,9 @@
                 </div>
             </div>
             <div class="col h-100">
-                <form class="input-group mt-5" method="post">
-                    <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
-                    <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
+                <form class="input-group mt-5" method="post" action="search.php">
+                    <input type="text" aria-label="First name" class="form-control" id="nom" name="nom" placeholder="Nom, spécialité">
+                    <input type="text" aria-label="Last name" class="form-control" id="postal" name="postal" placeholder="Où ?">
                     <button class="btn btn-danger me-3" type="submit" id="button-addon2">Rechercher</button>
                 </form>
             </div>

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="src/js/signup.js" defer></script>
 </head>
 <?php
 require('src/php/db/dbconnect.php');
@@ -17,11 +18,12 @@ require('src/php/db/Signup.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $pdo = dbConnect();
+session_start();
 ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
      <a href="index.php">
-         <p id="DoctISEN" style="position: fixed; top: 0px; left: 0px; font-size: 36px">
+         <p id="DoctISEN" class="top-0">
              Doct'ISEN
          </p>
      </a>
@@ -54,27 +56,28 @@ $pdo = dbConnect();
                  <input type="tel" pattern="[0-9]{10}" class="form-control" id="Num" name="phone" placeholder="Numéro de téléphone">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmail1" name="mail" placeholder="email@example.com">
+                 <label for="mail" class="form-label">Email address</label>
+                 <input type="email" class="form-control" id="mail" name="mail" placeholder="email@example.com">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormEmailConfirmation1" class="form-label">Email address confirmation</label>
-                 <input type="email" class="form-control" id="exampleDropdownFormEmailConfirmation1" name="mailConfirmation" placeholder="email@example.com">
+                 <label for="mailConfirmation" class="form-label">Email address confirmation</label>
+                 <input type="email" class="form-control" id="mailConfirmation" name="mailConfirmation" placeholder="email@example.com">
+                 <p class="text-danger fw-bold" id="mail-error"></p>
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="Password">
+                 <label for="password" class="form-label">Password</label>
+                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
              </div>
              <div class="mb-3">
-                 <label for="exampleDropdownFormPasswordConfirmation1" class="form-label">Password Confirmation</label>
-                 <input type="password" class="form-control" id="exampleDropdownFormPasswordConfirmation1" name="passwordConfirmation" placeholder="Password">
+                 <label for="passwordConfirmation" class="form-label">Password Confirmation</label>
+                 <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation" placeholder="Password">
+                 <p class="text-danger fw-bold" id="password-error"></p>
              </div>
              <div class="align-content-center text-center ">
-                 <button type="submit" class="btn btn-danger logButton">Se connecter</button>
+                 <button type="submit" class="btn btn-danger logButton disabled" id="signupButton">Se connecter</button>
              </div>
          </form>
          <?php
-         session_start();
          if(!empty($_POST['mail']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['phone']) && !empty($_POST['password']) && !empty($_POST['passwordConfirmation']) && !empty($_POST['mailConfirmation'])){
              $mail = ($_POST["mail"]);
              $password = ($_POST["password"]);
