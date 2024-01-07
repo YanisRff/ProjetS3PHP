@@ -2,6 +2,14 @@
 
 class Medecin
 {
+    public static function getMedecinFromId($pdo,$id) {
+        $query = $pdo->prepare("SELECT * FROM medecin WHERE m_id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public static function getMedecin($pdo,$mail) {
         $query = $pdo->prepare("SELECT * FROM medecin WHERE m_mail = :mail");
         $query->bindParam(':mail', $mail);
