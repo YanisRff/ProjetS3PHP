@@ -17,16 +17,18 @@ def rdv(file):
     with open(file, "w") as file:
         current_date = date.today().strftime("%Y-%m-%d")
         time = "08:00:00 +00:00"
+        k = 1
         for i in range(1, 100):
             for j in range(1, 11):
                 file.write(f"INSERT INTO rendez_vous (rdv_id, rdv_date, rdv_time, l_id) VALUES (")
-                file.write(f"{i},")
+                file.write(f"{k},")
                 file.write(f"'{current_date}', '{time}',")
                 file.write(f"'{randint(1, 99)}');\n")
                 time_parts = time.split(':')
                 hours = int(time_parts[0])
                 hours = (hours + 1) % 24
                 time = f"{hours:02d}:{time_parts[1]}:{time_parts[2]}"
+                k += 1
             current_date_parts = current_date.split('-')
             year = int(current_date_parts[0])
             month = int(current_date_parts[1])
@@ -93,16 +95,18 @@ def all(file):
             projet.write(f"{i}, 'Rue{i}', 'Ville{i}', {randint(1000, 95999)});\n")
         current_date = date.today().strftime("%Y-%m-%d")
         time = "08:00:00 +00:00"
+        k = 1
         for i in range(1, 100):
             for j in range(1, 11):
                 projet.write(f"INSERT INTO rendez_vous (rdv_id, rdv_date, rdv_time, l_id) VALUES (")
-                projet.write(f"{i},")
+                projet.write(f"{k},")
                 projet.write(f"'{current_date}', '{time}',")
                 projet.write(f"'{randint(1, 99)}');\n")
                 time_parts = time.split(':')
                 hours = int(time_parts[0])
                 hours = (hours + 1) % 24
                 time = f"{hours:02d}:{time_parts[1]}:{time_parts[2]}"
+                k += 1
             current_date_parts = current_date.split('-')
             year = int(current_date_parts[0])
             month = int(current_date_parts[1])
