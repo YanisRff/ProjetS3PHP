@@ -12,6 +12,7 @@
      require('src/php/db/dbconnect.php');
      require('src/php/constants.php');
      require('src/php/db/Login.php');
+     require('src/php/components/token.php');
      require('src/php/db/Rdv-praticien.php');
      ini_set('display_errors', 1);
      error_reporting(E_ALL);
@@ -38,7 +39,8 @@
         <div class="d-flex flex-row flex-wrap my-5 mx-5 gap-5 justify-content-center text-center">
 
             <?php try {
-                $rdv = getAllNiche($pdo);
+                $token = tokenDecode();
+                $rdv = getAllNiche($pdo, $token[1]);
                 if ($rdv != null && count($rdv) > 0){
                 foreach ($rdv as $row) {
                     $dateStr = $row["rdv_date"];
