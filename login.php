@@ -16,8 +16,8 @@
         require('src/php/db/Login.php');
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
-        $pdo = dbConnect();
         session_start();
+        $pdo = dbConnect();
  ?>
  <body style="background-color: #EEF2F7">
  <div id="topbar">
@@ -54,17 +54,16 @@
              </div>
              <?php
                 if(!empty($_POST['mail']) && !empty($_POST['password'])){
-                    $mail = ($_POST["mail"]);
-                    $password = ($_POST["password"]);
-                    if(LoginPatient::Login($pdo,$mail,$password)){
+                    $login = LoginPatient::Login($pdo,$_POST["mail"],$_POST["password"]);
+                    if($login != false){
                         error_log("Login success");
-                        $_SESSION['id'] = $mail;
+                        $_SESSION['token'] = base64_encode("patient:".strval($login));
                         echo '<meta http-equiv="refresh" content="0;url=index.php">';
                     } else {
                         error_log('Erreur de connexion');
+                    }
                 }
-            }
-        ?>
+            ?>
          </div>
      </div>
      <div class="p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">

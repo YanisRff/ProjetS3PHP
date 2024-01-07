@@ -17,16 +17,14 @@ class LoginPatient {
     public static function Login($pdo,$mail,$password) {
         
         if(LoginPatient::checkMail($pdo,$mail)){
-            $query = $pdo->prepare("SELECT p_password FROM patient where p_mail = :mail");
+            $query = $pdo->prepare("SELECT p_id,p_password FROM patient where p_mail = :mail");
             $query->bindParam(':mail', $mail);
             $query->execute();
             $result = $query->fetch(PDO::FETCH_ASSOC);
 
             if(password_verify($password,$result['p_password'])){
                 echo "Login success";
-                //Garde en mémoire l'adresse mail de l'utilisateur
-                $_SESSION['id'] = $mail;
-                return true;
+                return $result['p_id'];
             } else {
                 echo "Login failed";
                 return false;
@@ -67,7 +65,7 @@ class LoginMedecin {
 
             if(password_verify($password,$result['m_password'])){
                 echo "Login success";
-                return true;
+                return $result['m_id'];
             } else {
                 echo "Login failed";
                 return false;
