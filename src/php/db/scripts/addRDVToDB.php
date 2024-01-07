@@ -12,6 +12,8 @@ $query = $pdo->prepare("UPDATE rendez_vous SET p_id = :p_id WHERE rdv_id = :rdv_
 $query->bindParam(':p_id', $patient);
 $query->bindParam(':rdv_id', $rdv);
 $query->execute();
+
+
 //Redirect to the rdv.php page
 echo '<meta http-equiv="refresh" content="0;URL=../../../../rdv.php">';
 

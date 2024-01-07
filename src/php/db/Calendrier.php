@@ -27,7 +27,11 @@ function selectRDVForDate($pdo, $date, $medecin){
         $innerQuery->execute();
         $innerQueryResult = $innerQuery->fetchAll();
         if ($innerQueryResult) {
-            foreach ($innerQueryResult as $innerRow) {
+            $innerQuery2 = $pdo->prepare("SELECT * FROM rendez_vous WHERE rdv_id = :rdv_id AND p_id IS NULL");
+            $innerQuery2->bindParam(':rdv_id', $row['rdv_id']);
+            $innerQuery2->execute();
+            $innerQuery2Result = $innerQuery2->fetchAll();
+            foreach ($innerQuery2Result as $innerRow) {
                 array_push($availableHours, $innerRow['rdv_id']);
             }
         }
