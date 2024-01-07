@@ -8,8 +8,9 @@ function getAllNiche($pdo, $id){
     INNER JOIN medecin ON propose.m_id = medecin.m_id
     INNER JOIN lieu ON lieu.l_id = rendez_vous.l_id
     
-    WHERE CURRENT_DATE = rdv_date AND m_id = :id
+    WHERE CURRENT_DATE = rdv_date AND medecin.m_id = :id
     ORDER BY rdv_date, rdv_time ASC");
+
     $statement->bindParam(':id', $id);
     $statement->execute();
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -19,6 +20,7 @@ function getAllNiche($pdo, $id){
     } else {
         return null;
     }
+
 }
 
 ?>
