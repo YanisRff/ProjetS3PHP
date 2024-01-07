@@ -1,4 +1,5 @@
 <?php
+    require('src/php/db/Patient.php');
     function loginUI($pdo){
         if (checklogin()){
             $token = tokenDecode();
