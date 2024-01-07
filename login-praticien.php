@@ -53,18 +53,18 @@
                  </a>
              </div>
              <?php
-             if(!empty($_POST['mail']) && !empty($_POST['password'])){
-                 $mail = ($_POST["mail"]);
-                 $password = ($_POST["password"]);
-                 if(LoginMedecin::Login($pdo,$mail,$password)){
-                     error_log("Login success");
-                     $_SESSION['id'] = $mail;
-                     echo '<meta http-equiv="refresh" content="0;url=index.php">';
-                 } else {
-                     error_log('Erreur de connexion');
-                 }
-             }
-             ?>
+                session_start();
+                if(!empty($_POST['mail']) && !empty($_POST['password'])){
+                    $login = LoginMedecin::Login($pdo,$_POST["mail"],$_POST["password"]);
+                    if($login != false){
+                        error_log("Login success");
+                        $_SESSION['token'] = base64_encode("medecin:"+$login);
+                        echo '<meta http-equiv="refresh" content="0;url=index.php">';
+                    } else {
+                        error_log('Erreur de connexion');
+                    }
+                }
+            ?>
          </div>
      </div>
      <div class="p-3 m-0 border-0 bd-example m-0 border-0 text-center justify-content-center mt-5">
