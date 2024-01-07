@@ -45,7 +45,8 @@ function displayRDVForDate($pdo, $date, $medecin){
         foreach ($availableHours as $hour){
             $hourValue = selectRDVTimeByID($pdo, $hour);
             $hourValue = substr($hourValue, 0, 5);
-            $patient = "4";
+            $token = tokenDecode();
+            $patient = $token[1];
             echo '<a href="./src/php/db/scripts/addRDVToDB.php?id='.$hour.'&patient='.$patient.'" class="btn btn-danger w-100">'.$hourValue.'</a>';
         }
     }
