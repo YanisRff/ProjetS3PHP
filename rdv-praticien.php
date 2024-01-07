@@ -12,6 +12,10 @@
      require('src/php/db/dbconnect.php');
      require('src/php/constants.php');
      require('src/php/db/Login.php');
+     require('src/php/components/check.php');
+     require('src/php/components/token.php');
+     require('src/php/components/user-login.php');
+     require('src/php/db/Medecin.php');
      require('src/php/db/Rdv-praticien.php');
      ini_set('display_errors', 1);
      error_reporting(E_ALL);
@@ -29,9 +33,10 @@
             </a>
         </div>
         <div class="d-flex flex-row align-items-center gap-3 me-2">
-            <img src="src/img/avatar.png" alt="avatar" id="avatar" style="width: 14.3%; height: auto; border-radius: 50%">
-            <div>
-                <a class="text-white fw-bold mt-3 link-underline-opacity-75-hover link-underline link-underline-opacity-0 link-offset-3-hover link-underline-light">Félix MARQUET</a>
+            <div class="d-flex flex-row align-items-center gap-3 me-2">
+                <?php
+                loginUI($pdo);
+                ?>
             </div>
         </div>
     </div>
@@ -39,7 +44,7 @@
         <div class="d-flex flex-row flex-wrap my-5 mx-5 gap-5 justify-content-center text-center">
 
             <?php try {
-                $rdv = getAllNiche($pdo);
+                $rdv = getAllNiche($pdo, $token[1]);
                 if ($rdv != null && count($rdv) > 0){
                 foreach ($rdv as $row) {
                     $dateStr = $row["rdv_date"];
