@@ -12,6 +12,7 @@
          require('src/php/db/dbconnect.php');
          require('src/php/constants.php');
          require('src/php/db/Login.php');
+         require('php/components/check.php');
          require('src/php/db/Rdv.php');
          ini_set('display_errors', 1);
          error_reporting(E_ALL);

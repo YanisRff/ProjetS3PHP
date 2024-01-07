@@ -53,7 +53,6 @@
                  </a>
              </div>
              <?php
-                session_start();
                 if(!empty($_POST['mail']) && !empty($_POST['password'])){
                     $login = LoginMedecin::Login($pdo,$_POST["mail"],$_POST["password"]);
                     if($login != false){
