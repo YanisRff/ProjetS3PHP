@@ -51,9 +51,9 @@
     </div>
 </div>
 <div id="searchbar">
-    <form class="input-group p-5" method="post">
-        <input type="text" aria-label="First name" class="form-control" placeholder="Nom, spécialité, établissement ...">
-        <input type="text" aria-label="Last name" class="form-control" placeholder="Où ?">
+    <form action="search.php" class="input-group p-5" method="post">
+        <input type="text" aria-label="First name" class="form-control" id="nom" name="nom" placeholder="Nom, spécialité, établissement ...">
+        <input type="text" aria-label="Last name" class="form-control" id="postal" name="postal" placeholder="Où ?">
         <button class="btn btn-danger" type="submit" id="button-addon2">Rechercher</button>
     </form>
 </div>
