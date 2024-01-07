@@ -11,10 +11,12 @@
     <?php
     require('src/php/db/dbconnect.php');
     require('src/php/constants.php');
+    require('src/php/components/token.php');
     require('src/php/db/Calendrier.php');
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
     $pdo = dbConnect();
+    session_start();
     ?>
 </head>
 <body>
