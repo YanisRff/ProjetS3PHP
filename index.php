@@ -30,9 +30,9 @@
             </p>
         </a>
         <div class="d-flex position-fixed end-0 flex-row align-items-center gap-3 mt-2 top-0">
-            <a href="login-praticien.php"> <button type="button" class="btn btn-danger" style="top: 0.4375em;">Vous êtes praticien ?</button> </a>
-            <a href="login.php"> <button type="button" class="btn btn-danger" style="top: 0.4375em;">Se connecter</button></a>
-            <p>   </p>
+            <?php
+                loginUI($pdo);
+            ?>
         </div>
         <div id="rdv">
             <p class="text-white fw-bold fs-3">Trouvez un rendez vous avec un medecin</p>
