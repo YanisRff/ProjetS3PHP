@@ -44,6 +44,7 @@
         <div class="d-flex flex-row flex-wrap my-5 mx-5 gap-5 justify-content-center text-center">
 
             <?php try {
+                $token = tokenDecode();
                 $rdv = getAllNiche($pdo, $token[1]);
                 if ($rdv != null && count($rdv) > 0){
                 foreach ($rdv as $row) {
