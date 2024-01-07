@@ -116,10 +116,10 @@
                                     echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$occupation</h6>";
                                     echo '</div>';
                                     echo '<div class="card-footer">';
-                                    echo '<form method="post" action="../../../calendrier.php">';
+                                    echo '<form method="post" action="calendrier.php">';
                                     echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
                                     echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
-                                    echo '<button type="button" class="btn btn-link">Reprendre rendez-vous</button>';
+                                    echo '<button type="submit" class="btn btn-link">Reprendre rendez-vous</button>';
                                     echo '</form>';
                                     echo '</div>';
                                     echo '</div>';
