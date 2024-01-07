@@ -12,11 +12,14 @@
          require('src/php/db/dbconnect.php');
          require('src/php/constants.php');
          require('src/php/db/Login.php');
-         require('php/components/check.php');
+         require('src/php/components/check.php');
+         require('src/php/components/token.php');
+         require('src/php/components/user-login.php');
          require('src/php/db/Rdv.php');
          ini_set('display_errors', 1);
          error_reporting(E_ALL);
          $pdo = dbConnect();
+         session_start();
     ?>
  </head>
  <body>
@@ -33,8 +36,6 @@
                 <?php
                 loginUI($pdo);
                         ?>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -46,10 +47,10 @@
                         <h5 class="text-center">Vos rendez-vous à venir</h5>
 
                         <?php try {
+                            $token = tokenDecode();
+                            $rdv = getRdvByPatient($pdo, $token[1]);
 
-                            $rdv = getRdvByPatient($pdo);
-
-                            if (count($rdv) > 0) {
+                            if ($rdv != null && count($rdv) > 0){
                                 foreach ($rdv as $row) {
                                     $dateStr = $row["rdv_date"];
                                     $dateString = new DateTime($dateStr);
@@ -88,9 +89,10 @@
                     <div class="mt-3 align-self-center">
                         <h5 class="text-center">Vos rendez-vous passés</h5>
                         <?php try {
-                            $rdv = getPastRdvByPatient($pdo);
+                            $token = tokenDecode();
+                            $rdv = getPastRdvByPatient($pdo, $token[1]);
 
-                            if (count($rdv) > 0) {
+                            if ($rdv != null && count($rdv) > 0){
                                 foreach ($rdv as $row) {
                                     $dateStr = $row["rdv_date"];
                                     $dateString = new DateTime($dateStr);
@@ -135,7 +137,8 @@
             <div class="col border-end border-dark border-3 h-100 mt-2 text-center d-flex flex-column justify-content-center">
 
                 <?php
-                $rdv = getNextRdvByPatient($pdo);
+                $token = tokenDecode();
+                $rdv = getNextRdvByPatient($pdo, $token[1]);
                 $dateStr = $rdv["rdv_date"];
                 $dateString = new DateTime($dateStr);
                 $date = $dateString->format('d F Y');

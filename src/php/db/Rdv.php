@@ -7,7 +7,7 @@ function getRdvByPatient($pdo, $id){
     INNER JOIN medecin ON propose.m_id = medecin.m_id
     INNER JOIN lieu on lieu.l_id = rendez_vous.l_id
     
-    WHERE NOW() <= (rdv_date + rdv_time) AND p_id = :id
+    WHERE NOW() <= (rdv_date + rdv_time) AND patient.p_id = :id
     ORDER BY rdv_date, rdv_time ASC");
     $statement->bindParam(':id', $id);
     $statement->execute();
@@ -28,7 +28,7 @@ function getPastRdvByPatient($pdo, $id){
     INNER JOIN medecin ON propose.m_id = medecin.m_id
     INNER JOIN lieu on lieu.l_id = rendez_vous.l_id
     
-    WHERE NOW() > (rdv_date + rdv_time) AND p_id = :id
+    WHERE NOW() > (rdv_date + rdv_time) AND patient.p_id = :id
     ORDER BY rdv_date, rdv_time ASC");
     $statement->bindParam(':id', $id);
     $statement->execute();
@@ -49,7 +49,7 @@ function getNextRdvByPatient($pdo, $id){
     INNER JOIN medecin ON propose.m_id = medecin.m_id
     INNER JOIN lieu on lieu.l_id = rendez_vous.l_id
     
-    WHERE NOW() <= (rdv_date + rdv_time) AND p_id = :id
+    WHERE NOW() <= (rdv_date + rdv_time) AND patient.p_id = :id
     ORDER BY rdv_date, rdv_time ASC");
     $statement->bindParam(':id', $id);
     $statement->execute();
