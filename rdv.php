@@ -151,6 +151,7 @@
                 $patient = $rdv["patient"];
                 $adresse = $rdv["adresse"];
                 $ville = $rdv["ville"];
+                $MedID = $rdv["m_id"];
 
 
                 echo '<div class="card rounded-4 mx-2 pointer">';
