@@ -21,7 +21,7 @@ def rdv(file):
             for j in range(1, 11):
                 file.write(f"INSERT INTO rendez_vous (rdv_date, rdv_time, l_id) VALUES (")
                 file.write(f"'{current_date}', '{time}',")
-                file.write(f"'{randint(1, 100)}');\n")
+                file.write(f"'{randint(1, 99)}');\n")
                 time_parts = time.split(':')
                 hours = int(time_parts[0])
                 hours = (hours + 1) % 24
@@ -96,7 +96,7 @@ def all(file):
             for j in range(1, 11):
                 projet.write(f"INSERT INTO rendez_vous (rdv_date, rdv_time, l_id) VALUES (")
                 projet.write(f"'{current_date}', '{time}',")
-                projet.write(f"'{randint(1, 100)}');\n")
+                projet.write(f"'{randint(1, 99)}');\n")
                 time_parts = time.split(':')
                 hours = int(time_parts[0])
                 hours = (hours + 1) % 24
