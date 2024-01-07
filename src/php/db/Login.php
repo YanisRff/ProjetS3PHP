@@ -58,7 +58,7 @@ class LoginMedecin {
     public static function Login($pdo,$mail,$password) {
 
         if(LoginMedecin::checkMail($pdo,$mail)){
-            $query = $pdo->prepare("SELECT m_password FROM medecin where m_mail = :mail");
+            $query = $pdo->prepare("SELECT m_id, m_password FROM medecin where m_mail = :mail");
             $query->bindParam(':mail', $mail);
             $query->execute();
             $result = $query->fetch(PDO::FETCH_ASSOC);

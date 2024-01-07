@@ -57,7 +57,7 @@
                     $login = LoginMedecin::Login($pdo,$_POST["mail"],$_POST["password"]);
                     if($login != false){
                         error_log("Login success");
-                        $_SESSION['token'] = base64_encode("medecin:"+$login);
+                        $_SESSION['token'] = base64_encode("medecin:".strval($login));
                         echo '<meta http-equiv="refresh" content="0;url=index.php">';
                     } else {
                         error_log('Erreur de connexion');
