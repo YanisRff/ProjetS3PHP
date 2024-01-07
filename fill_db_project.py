@@ -27,9 +27,28 @@ def rdv(file):
                 hours = (hours + 1) % 24
                 time = f"{hours:02d}:{time_parts[1]}:{time_parts[2]}"
             current_date_parts = current_date.split('-')
+            year = int(current_date_parts[0])
+            month = int(current_date_parts[1])
             day = int(current_date_parts[2])
-            day = (day + 1) % 31
-            current_date = f"{current_date_parts[0]}-{current_date_parts[1]}-{day:02d}"
+            if day == 28 and month == 2 and (year % 4 != 0 or (year % 100 == 0 and year % 400 != 0)):
+                day = 1
+                month += 1
+            elif day == 29 and month == 2:
+                day = 1
+                month += 1
+            elif day == 30 and (month == 4 or month == 6 or month == 9 or month == 11):
+                day = 1
+                month += 1
+            elif day == 31:
+                day = 1
+                if month == 12:
+                    month = 1
+                    year += 1
+                else:
+                    month += 1
+            else:
+                day += 1
+            current_date = f"{year:04d}-{month:02d}-{day:02d}"
             time = "08:00:00 +00:00"
         file.close()
 
@@ -77,15 +96,34 @@ def all(file):
             for j in range(1, 11):
                 projet.write(f"INSERT INTO rendez_vous (rdv_date, rdv_time, l_id) VALUES (")
                 projet.write(f"'{current_date}', '{time}',")
-                projet.write(f"'{randint(1, 99)}');\n")
+                projet.write(f"'{randint(1, 100)}');\n")
                 time_parts = time.split(':')
                 hours = int(time_parts[0])
                 hours = (hours + 1) % 24
                 time = f"{hours:02d}:{time_parts[1]}:{time_parts[2]}"
             current_date_parts = current_date.split('-')
+            year = int(current_date_parts[0])
+            month = int(current_date_parts[1])
             day = int(current_date_parts[2])
-            day = (day + 1) % 31
-            current_date = f"{current_date_parts[0]}-{current_date_parts[1]}-{day:02d}"
+            if day == 28 and month == 2 and (year % 4 != 0 or (year % 100 == 0 and year % 400 != 0)):
+                day = 1
+                month += 1
+            elif day == 29 and month == 2:
+                day = 1
+                month += 1
+            elif day == 30 and (month == 4 or month == 6 or month == 9 or month == 11):
+                day = 1
+                month += 1
+            elif day == 31:
+                day = 1
+                if month == 12:
+                    month = 1
+                    year += 1
+                else:
+                    month += 1
+            else:
+                day += 1
+            current_date = f"{year:04d}-{month:02d}-{day:02d}"
             time = "08:00:00 +00:00"
         spe = ["Generaliste", "Cardiologue", "Dermatologue", "Gynecologue", "Ophtalmologue", "ORL", "Pediatre", "Pneumologue", "Psychiatre", "Rhumatologue", "Urologue", "Kinesitherpeute"]
         for i in range(1, 100):
@@ -102,3 +140,4 @@ def all(file):
         projet.close()
 
 all("projet.sql")
+#rdv("rdv.sql")
