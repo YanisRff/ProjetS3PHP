@@ -13,6 +13,7 @@
  <?php
         require('src/php/db/dbconnect.php');
         require('src/php/db/Patient.php');
+        require('src/php/db/Medecin.php');
         require('src/php/constants.php');
         require('src/php/components/check.php');
         require('src/php/components/token.php');
