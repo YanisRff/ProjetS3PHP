@@ -12,6 +12,7 @@
      require('src/php/db/dbconnect.php');
      require('src/php/constants.php');
      require('src/php/db/Login.php');
+     require('src/php/db/Rdv-praticien.php');
      ini_set('display_errors', 1);
      error_reporting(E_ALL);
      $pdo = dbConnect();
@@ -36,46 +37,46 @@
     <div class="h-100">
         <div class="d-flex flex-row flex-wrap my-5 mx-5 gap-5 justify-content-center text-center">
 
-
-
             <?php try {
-    $sql = "SELECT rdv_date, rdv_time, concat(p_name, ' ', p_surname) as patient, p_mail, p_phone
-    FROM rendez_vous
-        INNER JOIN patient ON rendez_vous.p_id = patient.p_id
-        INNER JOIN propose ON rendez_vous.rdv_id = propose.rdv_id
-        INNER JOIN medecin ON propose.m_id = medecin.m_id
-    
-    WHERE NOW() <= (rdv_date + rdv_time) AND m_mail = 'a@a.fr'
-    ORDER BY rdv_date, rdv_time ASC                             
-    LIMIT 5;";
-    $stmt = $pdo->query($sql);
-
-    // Check if there are rows in the result
-    if ($stmt->rowCount() > 0) {
-        // Fetch data and output it
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $dateStr = $row["rdv_date"];
-            $dateString = new DateTime($dateStr);
-            $date = $dateString->format('d F Y');
-            $uglyTime = $row["rdv_time"];
-            $dateTime = new DateTime($uglyTime);
-            $time = $dateTime->format('H:i');
-            $patient = $row["patient"];
-            $mail = $row["p_mail"];
-            $phone = $row["p_phone"];
-            echo '<div class="card rounded-4 mx-2 pointer">';
-            echo '<div class="card-header bg-danger">';
-            echo '<div class="d-flex flex-row justify-content-between text-white">';
-            echo "<p>$date</p>";
-            echo "<p>$time</p>";
-            echo '</div>';
-            echo '</div>';
-            echo '<div class="card-body">';
-            echo "<h5 class='card-title'>$patient</h5>";
-            echo "<p class='card-subtitle mb-2 text-body-secondary'>$mail</p>";
-            echo "<p class='card-subtitle mb-2 text-body-secondary'>$phone</p>";
-            echo '</div>';
-            echo '</div>';
+                $rdv = getAllNiche($pdo);
+                if ($rdv != null && count($rdv) > 0){
+                foreach ($rdv as $row) {
+                    $dateStr = $row["rdv_date"];
+                    $dateString = new DateTime($dateStr);
+                    $date = $dateString->format('d F Y');
+                    $uglyTime = $row["rdv_time"];
+                    $dateTime = new DateTime($uglyTime);
+                    $time = $dateTime->format('H:i');
+                    $patient = $row["patient"];
+                    $mail = $row["p_mail"];
+                    $phone = $row["p_phone"];
+                    if ($mail != null){
+                        echo '<div class="card rounded-4 mx-2 pointer">';
+                        echo '<div class="card-header bg-danger">';
+                        echo '<div class="d-flex flex-row justify-content-between text-white">';
+                        echo "<p>$date</p>";
+                        echo "<p>$time</p>";
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div class="card-body">';
+                        echo "<h5 class='card-title'>$patient</h5>";
+                        echo "<p class='card-subtitle mb-2 text-body-secondary'>$mail</p>";
+                        echo "<p class='card-subtitle mb-2 text-body-secondary'>$phone</p>";
+                        echo '</div>';
+                        echo '</div>';
+                    } else {
+                        echo '<div class="card rounded-4 mx-2 pointer">';
+                        echo '<div class="card-header bg-danger">';
+                        echo '<div class="d-flex flex-row justify-content-between text-white">';
+                        echo "<p>$date</p>";
+                        echo "<p>$time</p>";
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div class="card-body">';
+                        echo "<h5 class='card-title'>Vous n'avez pas de" . "<br>" . "rendez-vous pour ce créneau</h5>";
+                        echo '</div>';
+                        echo '</div>';
+                    }
         }
     } else {
         echo 'error';
