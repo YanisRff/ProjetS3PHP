@@ -42,7 +42,7 @@ function getPastRdvByPatient($pdo, $id){
 }
 
 function getNextRdvByPatient($pdo, $id){
-    $statement = $pdo->prepare("SELECT rdv_date, rdv_time, rendez_vous.rdv_id, concat(m_name, ' ', m_surname) as medecin, medecin.m_specialty, concat(p_name, ' ', p_surname) as patient, l_adress as adresse, concat(l_postal, ' ', l_city) as ville
+    $statement = $pdo->prepare("SELECT rdv_date, rdv_time, rendez_vous.rdv_id, concat(m_name, ' ', m_surname) as medecin, medecin.m_specialty, medecin.m_id, concat(p_name, ' ', p_surname) as patient, l_adress as adresse, concat(l_postal, ' ', l_city) as ville
     FROM rendez_vous
     INNER JOIN patient ON rendez_vous.p_id = patient.p_id
     INNER JOIN propose ON rendez_vous.rdv_id = propose.rdv_id
