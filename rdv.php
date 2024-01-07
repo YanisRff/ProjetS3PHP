@@ -61,7 +61,7 @@
                                     $time = $dateTime->format('H:i');
                                     $medic = $row["medecin"];
                                     $occupation = $row["m_specialty"];
-                                    echo '<div class="card rounded-4 mx-2 pointer">';
+                                    echo '<div class="card rounded-4 mx-2">';
                                     echo '<div class="card-header bg-danger">';
                                     echo '<div class="d-flex flex-row justify-content-between text-white">';
                                     echo "<p>$date</p>";
@@ -155,7 +155,7 @@
                     $MedID = $rdv["m_id"];
 
 
-                    echo '<div class="card rounded-4 mx-2 pointer">';
+                    echo '<div class="card rounded-4 mx-2">';
                     echo '<div class="card-header bg-danger">';
                     echo '<div class="d-flex flex-row justify-content-between text-white">';
                     echo "<p>$date</p>";
@@ -168,14 +168,14 @@
 
                     echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
 
-                    echo '<input type="hidden" name="rdv_id" value="' . $rdv["rdv_id"] . '">';
-                    echo '<input type="hidden" name="id" id="id" value="' . $MedID . '">';
-                    echo '<input type="hidden" name="start" id="start" value="' . date("Y-m-d") . '">';
+                    echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
+                    echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
+                    echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
                     echo '<button type="submit" name="move_button" class="btn btn-link">Déplacer le RDV</button>';
                     echo '</form>';
 
                     echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
-                    echo '<input type="hidden" name="rdv_id" value="' . $rdv["rdv_id"] . '">';
+                    echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
                     echo '<button type="submit" name="cancel_button" class="btn btn-link">Annuler RDV</button>';
                     echo '</form>';
                     echo '</div>';
@@ -187,10 +187,10 @@
 
                     echo '<form action="src/php/db/scripts/uploadFile.php" method="post" enctype="multipart/form-data">';
                     echo '<label for="file">Sélectionner un fichier :</label>';
-                    echo '<input type="hidden" name="rdv_id" value="' . $rdv["rdv_id"] . '">';
-                    echo '<input type="file" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png">';
+                    echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
+                    echo '<input type="file" class="form-control" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png">';
                     echo '<br><br>';
-                    echo '<input type="submit" name="submit" value="Envoyer le fichier">';
+                    echo '<input type="submit" class="btn border-black border-1" name="submit" value="Envoyer le fichier">';
                     echo '</form>';
 
                     echo '</div>';
