@@ -16,6 +16,7 @@
          require('src/php/components/token.php');
          require('src/php/components/user-login.php');
          require('src/php/db/Patient.php');
+         require('src/php/db/Medecin.php');
          require('src/php/db/Rdv.php');
          ini_set('display_errors', 1);
          error_reporting(E_ALL);
