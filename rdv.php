@@ -13,6 +13,7 @@
          require('src/php/constants.php');
          require('src/php/db/Login.php');
          require('php/components/check.php');
+         require('src/php/db/Rdv.php');
          ini_set('display_errors', 1);
          error_reporting(E_ALL);
          $pdo = dbConnect();
@@ -31,7 +32,7 @@
             <div class="d-flex flex-row align-items-center gap-3 me-2">
                 <?php
                 //Affichage du gravatar de l'utilisateur (si il en a un)
-                $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'MarlonTheriault@dayrep.com'");
+                $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'felix.marquet@isen-ouest.yncrea.fr'");
                 $query->execute();
                 $result = $query->fetchAll();
                 foreach ($result as $row) {
@@ -41,7 +42,7 @@
                 <div>
                     <a class="text-white fw-bold mt-3 link-underline-opacity-75-hover link-underline link-underline-opacity-0 link-offset-3-hover link-underline-light">
                         <?php
-                        $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'MarlonTheriault@dayrep.com'");
+                        $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'felix.marquet@isen-ouest.yncrea.fr'");
                         $query->execute();
                         $result = $query->fetchAll();
                         foreach ($result as $row) {
@@ -59,108 +60,166 @@
                 <div class="d-flex flex-column">
                     <div class="border-bottom pb-3 border-dark border-3 align-self-center">
                         <h5 class="text-center">Vos rendez-vous à venir</h5>
-                        <div class="card rounded-4 mx-2 pointer">
-                            <div class="card-header bg-danger">
-                                <div class="d-flex flex-row justify-content-between text-white">
-                                    <p>Jeudi 30 Novembre 2023</p>
-                                    <p>16:30</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Camille Frampas</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">Masseur-kinésitherapeute</h6>
-                            </div>
-                            <div class="card-footer">
-                                <p>Preparer la consulation</p>
-                            </div>
-                        </div>
+
+                        <?php try {
+
+                            $rdv = getRdvByPatient($pdo);
+
+                            if (count($rdv) > 0) {
+                                foreach ($rdv as $row) {
+                                    $dateStr = $row["rdv_date"];
+                                    $dateString = new DateTime($dateStr);
+                                    $date = $dateString->format('d F Y');
+                                    $uglyTime = $row["rdv_time"];
+                                    $dateTime = new DateTime($uglyTime);
+                                    $time = $dateTime->format('H:i');
+                                    $medic = $row["medecin"];
+                                    $occupation = $row["m_specialty"];
+                                    echo '<div class="card rounded-4 mx-2 pointer">';
+                                    echo '<div class="card-header bg-danger">';
+                                    echo '<div class="d-flex flex-row justify-content-between text-white">';
+                                    echo "<p>$date</p>";
+                                    echo "<p>$time</p>";
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '<div class="card-body">';
+                                    echo "<h5 class='card-title'>$medic</h5>";
+                                    echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$occupation</h6>";
+                                    echo '</div>';
+                                    echo '<div class="card-footer">';
+                                    echo "<p>Preparer la consulation</p>";
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo "Vous n'avez pas de rendez-vous à venir";
+                            }
+                        } catch (PDOException $e) {
+                            error_log('Database query error: ' . $e->getMessage());
+                            echo "Error fetching data from the database";
+                        }
+                        ?>
+
                     </div>
                     <div class="mt-3 align-self-center">
-                        <h5 class="text-center">Vos rendez-vous passé</h5>
-                        <div class="card rounded-4 mx-2 mt-2">
-                            <div class="card-header bg-danger">
-                                <div class="d-flex flex-row justify-content-between text-white">
-                                    <p>Jeudi 9 Novembre 2023</p>
-                                    <p>16:30</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Camille Frampas</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">Masseur-kinésitherapeute</h6>
-                            </div>
-                            <div class="card-footer">
-                                <p>Reprendre rendez-vous</p>
-                            </div>
-                        </div>
-                        <div class="card rounded-4 mx-2 mt-2">
-                            <div class="card-header bg-danger">
-                                <div class="d-flex flex-row justify-content-between text-white">
-                                    <p>Jeudi 16 Novembre 2023</p>
-                                    <p>16:30</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Camille Frampas</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">Masseur-kinésitherapeute</h6>
-                            </div>
-                            <div class="card-footer">
-                                <p>Reprendre rendez-vous</p>
-                            </div>
-                        </div>
-                        <div class="card rounded-4 mx-2 mt-2">
-                            <div class="card-header bg-danger">
-                                <div class="d-flex flex-row justify-content-between text-white">
-                                    <p>Jeudi 23 Novembre 2023</p>
-                                    <p>16:30</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Camille Frampas</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">Masseur-kinésitherapeute</h6>
-                            </div>
-                            <div class="card-footer">
-                                <p>Reprendre rendez-vous</p>
-                            </div>
-                        </div>
+                        <h5 class="text-center">Vos rendez-vous passés</h5>
+                        <?php try {
+                            $rdv = getPastRdvByPatient($pdo);
+
+                            if (count($rdv) > 0) {
+                                foreach ($rdv as $row) {
+                                    $dateStr = $row["rdv_date"];
+                                    $dateString = new DateTime($dateStr);
+                                    $date = $dateString->format('d F Y');
+                                    $uglyTime = $row["rdv_time"];
+                                    $dateTime = new DateTime($uglyTime);
+                                    $time = $dateTime->format('H:i');
+                                    $medic = $row["medecin"];
+                                    $occupation = $row["m_specialty"];
+                                    $MedID = $row["m_id"];
+                                    echo '<div class="card rounded-4 mx-2 pointer">';
+                                    echo '<div class="card-header bg-danger">';
+                                    echo '<div class="d-flex flex-row justify-content-between text-white">';
+                                    echo "<p>$date</p>";
+                                    echo "<p>$time</p>";
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '<div class="card-body">';
+                                    echo "<h5 class='card-title'>$medic</h5>";
+                                    echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$occupation</h6>";
+                                    echo '</div>';
+                                    echo '<div class="card-footer">';
+                                    echo '<form method="post" action="../../../calendrier.php">';
+                                    echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
+                                    echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
+                                    echo '<button type="button" class="btn btn-link">Reprendre rendez-vous</button>';
+                                    echo '</form>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo "Vous n'avez pas de rendez-vous passé";
+                            }
+                        } catch (PDOException $e) {
+                            error_log('Database query error: ' . $e->getMessage());
+                            echo "Error fetching data from the database";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
             <div class="col border-end border-dark border-3 h-100 mt-2 text-center d-flex flex-column justify-content-center">
-                <div class="card rounded-4 mx-2">
-                    <div class="card-header bg-danger">
-                        <div class="d-flex flex-row justify-content-between text-white">
-                            <p>Jeudi 30 Novembre 2023</p>
-                            <p>16:30</p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Camille Frampas</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Masseur-kinésitherapeute</h6>
-                        <a href="#" class="card-link">Déplacer le RDV</a>
-                        <a href="#" class="card-link text-danger">Annuler le RDV</a>
-                    </div>
-                </div>
-                <div class="card rounded-4 mx-2 mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Préparer la consulation</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Pour gagner du temps et améliorer votre prise en charge.</h6>
-                        <a href="#" class="card-link">Envoyer les documents</a>
-                    </div>
-                </div>
-                <div class="card rounded-4 mx-2 mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Patient</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Félix MARQUET</h6>
-                    </div>
-                </div>
-                <div class="card rounded-4 mx-2 mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Lieu de la consulation</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Ekilibre<br>
-                            1bis Rue du Metropolitain<br>
-                            44470 Carquefou<br></h6>
-                    </div>
-                </div>
+
+                <?php
+                $rdv = getNextRdvByPatient($pdo);
+                $dateStr = $rdv["rdv_date"];
+                $dateString = new DateTime($dateStr);
+                $date = $dateString->format('d F Y');
+                $uglyTime = $rdv["rdv_time"];
+                $dateTime = new DateTime($uglyTime);
+                $time = $dateTime->format('H:i');
+                $medic = $rdv["medecin"];
+                $occupation = $rdv["m_specialty"];
+                $patient = $rdv["patient"];
+                $adresse = $rdv["adresse"];
+                $ville = $rdv["ville"];
+
+
+                echo '<div class="card rounded-4 mx-2 pointer">';
+                echo '<div class="card-header bg-danger">';
+                echo '<div class="d-flex flex-row justify-content-between text-white">';
+                echo "<p>$date</p>";
+                echo "<p>$time</p>";
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="card-body">';
+                echo "<h5 class='card-title'>$medic</h5>";
+                echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$occupation</h6>";
+
+                echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
+
+                echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
+                echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
+                echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
+                echo '<button type="submit" name="move_button" class="btn btn-link">Déplacer le RDV</button>';
+                echo '</form>';
+
+                echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
+                echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
+                echo '<button type="submit" name="cancel_button" class="btn btn-link">Annuler RDV</button>';
+                echo '</form>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="card rounded-4 mx-2 mt-3">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Préparer la consulation</h5>';
+                echo '<h6 class="card-subtitle mb-2 text-body-secondary">Pour gagner du temps et améliorer votre prise en charge.</h6>';
+
+                echo '<form action="src/php/db/scripts/uploadFile.php" method="post" enctype="multipart/form-data">';
+                echo '<label for="file">Sélectionner un fichier :</label>';
+                echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
+                echo '<input type="file" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png">';
+                echo '<br><br>';
+                echo '<input type="submit" name="submit" value="Envoyer le fichier">';
+                echo '</form>';
+
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="card rounded-4 mx-2 mt-3">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Patient</h5>';
+                echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$patient</h6>";
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="card rounded-4 mx-2 mt-3">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Lieu de la consulation</h5>';
+                echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$adresse<br>";
+                echo "$ville<br></h6>";
+                echo '</div>';
+                echo '</div>';
+                ?>
+
             </div>
             <div class="col h-100">
                 <form class="input-group mt-5" method="post" action="search.php">
