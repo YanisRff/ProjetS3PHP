@@ -11,6 +11,10 @@
      <?php
         require('src/php/db/dbconnect.php');
         require('src/php/constants.php');
+         require('src/php/components/token.php');
+         require('src/php/components/check.php');
+         require('src/php/components/user-login.php');
+         require('src/php/db/Patient.php');
         require ('src/php/db/Search.php');
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
@@ -27,26 +31,10 @@
              </a>
          </div>
          <div class="d-flex flex-row align-items-center gap-3 me-2">
-             <?php
-                //Affichage du gravatar de l'utilisateur (si il en a un)
-                $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'MarlonTheriault@dayrep.com'");
-                $query->execute();
-                $result = $query->fetchAll();
-                foreach ($result as $row) {
-                    echo '<img src="https://www.gravatar.com/avatar/' . md5($row['p_mail']) . '?s=64" alt="avatar" id="avatar" style="width: 14.3%; height: auto; border-radius: 50%">';
-                }
-             ?>
-             <div>
-                 <a class="text-white fw-bold mt-3 link-underline-opacity-75-hover link-underline link-underline-opacity-0 link-offset-3-hover link-underline-light">
-                     <?php
-                            $query = $pdo->prepare("SELECT * FROM patient WHERE p_mail = 'MarlonTheriault@dayrep.com'");
-                            $query->execute();
-                            $result = $query->fetchAll();
-                            foreach ($result as $row) {
-                                echo $row['p_name'] . ' ' . $row['p_surname'];
-                            }
-                     ?>
-                 </a>
+             <div class="d-flex flex-row align-items-center gap-3 me-2">
+                 <?php
+                 loginUI($pdo);
+                 ?>
              </div>
          </div>
      </div>
