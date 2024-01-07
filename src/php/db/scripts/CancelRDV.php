@@ -19,9 +19,15 @@ if (isset($_POST['cancel_button'])) {
 
 if (isset($_POST['move_button'])) {
     $rdv_id = $_POST['rdv_id'];
+    $MedID = $_POST['medecin_id'];
+    $date = $_POST['date'];
     CancelRDV($pdo, $rdv_id);
 
-    header("Location: ../../../../calendrier.php");
+    echo '<form method="post" action="../../../../calendrier.php">';
+    echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
+    echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
+    echo '<button type="submit" class="btn btn-danger">Sélectionner un nouveau rendez-vous</button>';
+    echo '</form>';
     exit();
 }
 ?>
