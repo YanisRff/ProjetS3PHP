@@ -140,73 +140,83 @@
                 <?php
                 $token = tokenDecode();
                 $rdv = getNextRdvByPatient($pdo, $token[1]);
-                $dateStr = $rdv["rdv_date"];
-                $dateString = new DateTime($dateStr);
-                $date = $dateString->format('d F Y');
-                $uglyTime = $rdv["rdv_time"];
-                $dateTime = new DateTime($uglyTime);
-                $time = $dateTime->format('H:i');
-                $medic = $rdv["medecin"];
-                $occupation = $rdv["m_specialty"];
-                $patient = $rdv["patient"];
-                $adresse = $rdv["adresse"];
-                $ville = $rdv["ville"];
-                $MedID = $rdv["m_id"];
+                if($rdv != null) {
+                    $dateStr = $rdv["rdv_date"];
+                    $dateString = new DateTime($dateStr);
+                    $date = $dateString->format('d F Y');
+                    $uglyTime = $rdv["rdv_time"];
+                    $dateTime = new DateTime($uglyTime);
+                    $time = $dateTime->format('H:i');
+                    $medic = $rdv["medecin"];
+                    $occupation = $rdv["m_specialty"];
+                    $patient = $rdv["patient"];
+                    $adresse = $rdv["adresse"];
+                    $ville = $rdv["ville"];
+                    $MedID = $rdv["m_id"];
 
 
-                echo '<div class="card rounded-4 mx-2 pointer">';
-                echo '<div class="card-header bg-danger">';
-                echo '<div class="d-flex flex-row justify-content-between text-white">';
-                echo "<p>$date</p>";
-                echo "<p>$time</p>";
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="card-body">';
-                echo "<h5 class='card-title'>$medic</h5>";
-                echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$occupation</h6>";
+                    echo '<div class="card rounded-4 mx-2 pointer">';
+                    echo '<div class="card-header bg-danger">';
+                    echo '<div class="d-flex flex-row justify-content-between text-white">';
+                    echo "<p>$date</p>";
+                    echo "<p>$time</p>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="card-body">';
+                    echo "<h5 class='card-title'>$medic</h5>";
+                    echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$occupation</h6>";
 
-                echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
+                    echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
 
-                echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
-                echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
-                echo '<input type="hidden" name="start" id="start" value="'.date("Y-m-d").'">';
-                echo '<button type="submit" name="move_button" class="btn btn-link">Déplacer le RDV</button>';
-                echo '</form>';
+                    echo '<input type="hidden" name="rdv_id" value="' . $rdv["rdv_id"] . '">';
+                    echo '<input type="hidden" name="id" id="id" value="' . $MedID . '">';
+                    echo '<input type="hidden" name="start" id="start" value="' . date("Y-m-d") . '">';
+                    echo '<button type="submit" name="move_button" class="btn btn-link">Déplacer le RDV</button>';
+                    echo '</form>';
 
-                echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
-                echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
-                echo '<button type="submit" name="cancel_button" class="btn btn-link">Annuler RDV</button>';
-                echo '</form>';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="card rounded-4 mx-2 mt-3">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">Préparer la consulation</h5>';
-                echo '<h6 class="card-subtitle mb-2 text-body-secondary">Pour gagner du temps et améliorer votre prise en charge.</h6>';
+                    echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
+                    echo '<input type="hidden" name="rdv_id" value="' . $rdv["rdv_id"] . '">';
+                    echo '<button type="submit" name="cancel_button" class="btn btn-link">Annuler RDV</button>';
+                    echo '</form>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="card rounded-4 mx-2 mt-3">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">Préparer la consulation</h5>';
+                    echo '<h6 class="card-subtitle mb-2 text-body-secondary">Pour gagner du temps et améliorer votre prise en charge.</h6>';
 
-                echo '<form action="src/php/db/scripts/uploadFile.php" method="post" enctype="multipart/form-data">';
-                echo '<label for="file">Sélectionner un fichier :</label>';
-                echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
-                echo '<input type="file" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png">';
-                echo '<br><br>';
-                echo '<input type="submit" name="submit" value="Envoyer le fichier">';
-                echo '</form>';
+                    echo '<form action="src/php/db/scripts/uploadFile.php" method="post" enctype="multipart/form-data">';
+                    echo '<label for="file">Sélectionner un fichier :</label>';
+                    echo '<input type="hidden" name="rdv_id" value="' . $rdv["rdv_id"] . '">';
+                    echo '<input type="file" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png">';
+                    echo '<br><br>';
+                    echo '<input type="submit" name="submit" value="Envoyer le fichier">';
+                    echo '</form>';
 
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="card rounded-4 mx-2 mt-3">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">Patient</h5>';
-                echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$patient</h6>";
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="card rounded-4 mx-2 mt-3">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">Lieu de la consulation</h5>';
-                echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$adresse<br>";
-                echo "$ville<br></h6>";
-                echo '</div>';
-                echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="card rounded-4 mx-2 mt-3">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">Patient</h5>';
+                    echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$patient</h6>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="card rounded-4 mx-2 mt-3">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">Lieu de la consulation</h5>';
+                    echo "<h6 class='card-subtitle mb-2 text-body-secondary'>$adresse<br>";
+                    echo "$ville<br></h6>";
+                    echo '</div>';
+                    echo '</div>';
+                }else{
+                    echo '<div class="card rounded-4 mx-2 pointer">';
+                    echo '<div class="card-header bg-danger">';
+                    echo '<div class="d-flex flex-row justify-content-between text-white">';
+                    echo "<p>Vous n'avez pas de rendez-vous à venir</p>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
                 ?>
 
             </div>
