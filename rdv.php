@@ -208,6 +208,14 @@
                     echo "$ville<br></h6>";
                     echo '</div>';
                     echo '</div>';
+                }else{
+                    echo '<div class="card rounded-4 mx-2 pointer">';
+                    echo '<div class="card-header bg-danger">';
+                    echo '<div class="d-flex flex-row justify-content-between text-white">';
+                    echo "<p>Vous n'avez pas de rendez-vous à venir</p>";
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
                 }
                 ?>
 
