@@ -68,8 +68,8 @@
                         echo '</div>';
                         echo '<div class="card-body">';
                         echo "<h5 class='card-title'>$patient</h5>";
-                        echo "<p class='card-subtitle mb-2 text-body-secondary'>$mail</p>";
-                        echo "<p class='card-subtitle mb-2 text-body-secondary'>$phone</p>";
+                        echo "<a href='mailto:" . $mail . "' class='card-subtitle mb-2 text-body-secondary'>$mail</a>";
+                        echo "<a href='tel:" . "0" . $phone . "' class='card-subtitle mb-2 text-body-secondary'>$phone</a>";
                         echo '</div>';
                         echo '</div>';
                     } else {
@@ -96,6 +96,32 @@
 
 
 
+        </div>
+
+        <div class="d-flex flex-row flex-wrap my-5 mx-5 gap-5 justify-content-center text-center">
+            <?php
+            $token = tokenDecode();
+            $medID = $token[1];
+            $lieux = getAllLieux($pdo);
+            echo "<form action='src/php/db/scripts/createRDVToDB.php' method='post'>";
+            echo "<input type='hidden' name='medID' value='$medID'>";
+            echo "<input type='date' name='date'>";
+            echo "<input type='time' name='time'>";
+            echo "<select name='lieu' id='lieu'>";
+            echo "<option value=''>Choisissez un lieu</option>";
+            if ($lieux != null && count($lieux) > 0){
+                foreach ($lieux as $row){
+                    $adress = $row["l_adress"];
+                    $postal = $row["l_postal"];
+                    $city = $row["l_city"];
+                    $lieu = $adress . ', ' . $postal . ', ' . $city;
+                    echo "<option value='$lieu'>$adress, $postal,  $city</option>";
+                }
+            }
+            echo "</select>";
+            echo "<button type='submit' name='createRDV' class='btn btn-danger'>Créer un rendez-vous</button>";
+            echo "</form>";
+            ?>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
