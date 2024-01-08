@@ -21,15 +21,19 @@ if (isset($_POST['createRDV'])) {
     $lieuID = getLieuID($pdo, $place[0], $place[1], $place[2]);
 
     if ($medID != null && $date != null && $time != null && $lieuID != null) {
-        $query = $pdo->prepare("INSERT INTO rendez_vous (rdv_date, rdv_time, p_id, l_id) VALUES (:date, :time, :medID, :lieuID )");
-        $query->bindParam(':medID', $medID);
+        $query = $pdo->prepare("INSERT INTO rendez_vous (rdv_date, rdv_time, l_id) VALUES (:date, :time, :lieuID )");
         $query->bindParam(':date', $date);
         $query->bindParam(':time', $time);
         $query->bindParam(':lieuID', $lieuID);
         $query->execute();
+        $rdvID = $pdo->lastInsertId();
+        $query = $pdo->prepare("INSERT INTO propose (m_id, rdv_id) VALUES (:medID, :rdvID)");
+        $query->bindParam(':medID', $medID);
+        $query->bindParam(':rdvID', $rdvID);
+        $query->execute();
     }
 
-    //header("Location: ../../../../rdv-praticien.php");
+    header("Location: ../../../../rdv-praticien.php");
 
     exit();
 }

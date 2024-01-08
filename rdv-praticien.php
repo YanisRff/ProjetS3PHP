@@ -119,6 +119,7 @@
                 }
             }
             echo "</select>";
+            echo "<br><br>";
             echo "<button type='submit' name='createRDV' class='btn btn-danger'>Créer un rendez-vous</button>";
             echo "</form>";
             ?>
