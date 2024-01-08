@@ -189,9 +189,10 @@
                     echo '<form action="src/php/db/scripts/uploadFile.php" method="post" enctype="multipart/form-data">';
                     echo '<label for="file">Sélectionner un fichier :</label>';
                     echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
-                    echo '<input type="file" class="form-control" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png">';
+                    echo '<input type="file" class="form-control" name="file" id="file" accept=".pdf, .jpeg, .jpg, .png" disabled>';
                     echo '<br><br>';
-                    echo '<input type="submit" class="btn border-black border-1" name="submit" value="Envoyer le fichier">';
+                    echo '<input type="submit" class="btn border-black border-1 disabled" name="submit" value="Envoyer le fichier">';
+                    echo '<h6 class="card-subtitle text-danger">Maintenance en cours.</h6>';
                     echo '</form>';
 
                     echo '</div>';
