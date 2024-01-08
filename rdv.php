@@ -88,7 +88,7 @@
                         ?>
 
                     </div>
-                    <div class="mt-3 align-self-center">
+                    <div class="mt-3 align-self-center d-flex flex-column gap-2">
                         <h5 class="text-center">Vos rendez-vous passés</h5>
                         <?php try {
                             $token = tokenDecode();
@@ -172,12 +172,13 @@
                     echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
                     echo '<input type="hidden" name="medecin_id" id="id" value="'.$MedID.'">';
                     echo '<input type="hidden" name="date" id="start" value="'.date("Y-m-d").'">';
-                    echo '<button type="submit" name="move_button" class="btn btn-link">Déplacer le RDV</button>';
+                    echo '<button type="submit" name="move_button" class="btn btn-outline-danger">Déplacer le RDV</button>';
                     echo '</form>';
 
                     echo '<form action="/src/php/db/scripts/CancelRDV.php" method="post">';
                     echo '<input type="hidden" name="rdv_id" value="'.$rdv["rdv_id"].'">';
-                    echo '<button type="submit" name="cancel_button" class="btn btn-link">Annuler RDV</button>';
+                    echo '<br>';
+                    echo '<button type="submit" name="cancel_button" class="btn btn-outline-danger">Annuler RDV</button>';
                     echo '</form>';
                     echo '</div>';
                     echo '</div>';
