@@ -13,8 +13,13 @@ function checkMedecin(){
         if($token[0] == "medecin"){
             return true;
         } else {
-            echo '<meta http-equiv="refresh" content="0;url=login-praticien.php">';
-            return false;
+            if($token[0] == "patient"){
+                echo '<meta http-equiv="refresh" content="0;url=index.php">';
+                return false;
+            } else {
+                echo '<meta http-equiv="refresh" content="0;url=login-praticien.php">';
+                return false;
+            }
         }
     } else {
         echo '<meta http-equiv="refresh" content="0;url=index.php">';
@@ -28,8 +33,13 @@ function checkPatient(){
         if($token[0] == "patient"){
             return true;
         } else {
-            echo '<meta http-equiv="refresh" content="0;url=login.php">';
-            return false;
+            if($token[0] == "medecin"){
+                echo '<meta http-equiv="refresh" content="0;url=index.php">';
+                return false;
+            } else {
+                echo '<meta http-equiv="refresh" content="0;url=login.php">';
+                return false;
+            }
         }
     } else {
         echo '<meta http-equiv="refresh" content="0;url=index.php">';
