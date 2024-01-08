@@ -16,25 +16,13 @@ function selectRDVTimeByID($pdo, $id){
 
 function selectRDVForDate($pdo, $date, $medecin){
     $availableHours = array();
-    $query = $pdo->prepare("SELECT * FROM rendez_vous WHERE rdv_date = :date");
+    $query = $pdo->prepare("select * from rendez_vous rdv join public.propose p using (rdv_id) where p.m_id = :m_id and rdv.rdv_date = :date AND rdv.p_id IS NULL ORDER BY rdv_time ASC");
     $query->bindParam(':date', $date);
+    $query->bindParam(':m_id', $medecin);
     $query->execute();
     $outerResult = $query->fetchAll();
     foreach ($outerResult as $row) {
-        $innerQuery = $pdo->prepare("SELECT * FROM propose WHERE rdv_id = :rdv_id AND m_id = :m_id");
-        $innerQuery->bindParam(':rdv_id', $row['rdv_id']);
-        $innerQuery->bindParam(':m_id', $medecin);
-        $innerQuery->execute();
-        $innerQueryResult = $innerQuery->fetchAll();
-        if ($innerQueryResult) {
-            $innerQuery2 = $pdo->prepare("SELECT * FROM rendez_vous WHERE rdv_id = :rdv_id AND p_id IS NULL ORDER BY rdv_time ASC");
-            $innerQuery2->bindParam(':rdv_id', $row['rdv_id']);
-            $innerQuery2->execute();
-            $innerQuery2Result = $innerQuery2->fetchAll();
-            foreach ($innerQuery2Result as $innerRow) {
-                array_push($availableHours, $innerRow['rdv_id']);
-            }
-        }
+        array_push($availableHours, $row['rdv_id']);
     }
     return $availableHours;
 }
