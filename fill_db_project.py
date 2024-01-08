@@ -105,9 +105,8 @@ def all(file):
     mail = faker.email()
     phone = faker.phone_number()
     postal = faker.postcode()
-    #Remove the space between the phone number
     phone = phone.replace(" ", "")
-    with open(file, "w") as projet:
+    with open(file, "w", encoding="utf-8") as projet:
         projet.write("SET NAMES = 'utf8';\n")
         projet.write("SET CHARACTER = 'utf8';\n")
         for i in range(1, 100):
