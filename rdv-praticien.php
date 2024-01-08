@@ -8,6 +8,7 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="src/css/styles.css">
+   <link rel="icon" href="src/img/favicon.png" type="image/x-icon"/>
      <?php
      require('src/php/db/dbconnect.php');
      require('src/php/constants.php');

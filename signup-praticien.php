@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="src/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="src/js/signup.js" defer></script>
+    <link rel="icon" href="src/img/favicon.png" type="image/x-icon"/>
 </head>
 <?php
 require('src/php/db/dbconnect.php');
