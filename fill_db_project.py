@@ -156,7 +156,7 @@ def all(file):
                     day += 1
                 current_date = f"{year:04d}-{month:02d}-{day:02d}"
                 time = "08:00:00 +00:00"
-        spe = ["Generaliste", "Cardiologue", "Dermatologue", "Gynecologue", "Ophtalmologue", "ORL", "Pediatre", "Pneumologue", "Psychiatre", "Rhumatologue", "Urologue", "Kinesitherpeute"]
+        spe = ["Généraliste", "Cardiologue", "Dermatologue", "Gynécologue", "Ophtalmologue", "ORL", "Pédiatre", "Pneumologue", "Psychiatre", "Rhumatologue", "Urologue", "Kinésitherpeute"]
         for i in range(1, 100):
             faker3 = Faker('fr_FR')
             name3 = faker3.first_name()
