@@ -81,7 +81,7 @@
                         echo '</div>';
                         echo '</div>';
                         echo '<div class="card-body">';
-                        echo "<h5 class='card-title'>Vous n'avez pas de" . "<br>" . "rendez-vous pour ce créneau</h5>";
+                        echo "<h5 class='card-title'>Vous n'avez pas de" . "<br>" . "patient pour ce créneau</h5>";
                         echo '</div>';
                         echo '</div>';
                     }
