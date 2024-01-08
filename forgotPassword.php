@@ -14,7 +14,7 @@
 <?php
 require('src/php/db/dbconnect.php');
 require('src/php/constants.php');
-require('src/php/db/Login.php');
+require('src/php/db/ResetPassword.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $pdo = dbConnect();
