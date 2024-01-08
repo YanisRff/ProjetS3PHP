@@ -32,6 +32,7 @@ if (isset($_POST['move_button'])) {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Open+Sans&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="src/css/styles.css">
+   <link rel="icon" href="src/img/favicon.png" type="image/x-icon"/>
    </head>';
     echo '<form method="post" action="../../../../calendrier.php">';
     echo '<input type="hidden" name="id" id="id" value="'.$MedID.'">';
