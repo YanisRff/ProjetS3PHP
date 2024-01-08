@@ -22,6 +22,7 @@
          error_reporting(E_ALL);
          $pdo = dbConnect();
          session_start();
+         checkPatient();
     ?>
  </head>
  <body>
