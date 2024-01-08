@@ -105,6 +105,8 @@ def all(file):
     mail = faker.email()
     phone = faker.phone_number()
     postal = faker.postcode()
+    #Remove the space between the phone number
+    phone = phone.replace(" ", "")
     with open(file, "w") as projet:
         projet.write("SET NAMES = 'utf8';\n")
         projet.write("SET CHARACTER = 'utf8';\n")
@@ -156,9 +158,20 @@ def all(file):
                 time = "08:00:00 +00:00"
         spe = ["Generaliste", "Cardiologue", "Dermatologue", "Gynecologue", "Ophtalmologue", "ORL", "Pediatre", "Pneumologue", "Psychiatre", "Rhumatologue", "Urologue", "Kinesitherpeute"]
         for i in range(1, 100):
+            faker3 = Faker('fr_FR')
+            name3 = faker3.first_name()
+            surname3 = faker3.last_name()
+            mail3 = faker3.email()
+            phone3 = faker3.phone_number()
+            phone3 = phone3.replace(" ", "")
+            phone3 = phone3.replace(".", "")
+            phone3 = phone3.replace("+33", "0")
+            phone3 = phone3.replace("0(0)", "0")
+            phone3 = phone3.replace("(0)", "0")
+            postal3 = faker3.postcode()
             projet.write(f"INSERT INTO medecin (m_id, m_mail, m_name, m_surname, m_phone, m_password, m_postal, m_specialty) VALUES (")
-            projet.write(f"{i}, '{mail}', '{name}', '{surname}', '{phone}', '{hash_password('a')}")
-            projet.write(f"', '{postal}'")
+            projet.write(f"{i}, '{mail3}', '{name3}', '{surname3}', '{phone3}', '{hash_password('a')}")
+            projet.write(f"', '{postal3}'")
             projet.write(f", '{spe[randint(0, len(spe) - 1)]}');\n")
         for i in range(1, 100):
             faker2 = Faker('fr_FR')
@@ -166,6 +179,11 @@ def all(file):
             surname2 = faker2.last_name()
             mail2 = faker2.email()
             phone2 = faker2.phone_number()
+            phone2 = phone2.replace(" ", "")
+            phone2 = phone2.replace(".", "")
+            phone2 = phone2.replace("+33", "0")
+            phone2 = phone2.replace("0(0)", "0")
+            phone2 = phone2.replace("(0)", "0")
             projet.write(f"INSERT INTO patient (p_id, p_mail, p_name, p_surname, p_phone, p_password) VALUES (")
             projet.write(f"{i}, '{mail2}', '{name2}', '{surname2}', '{phone2}', '{hash_password('a')}');\n")
         for i in range(1, 97021):
