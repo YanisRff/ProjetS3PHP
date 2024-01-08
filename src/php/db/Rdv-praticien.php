@@ -23,4 +23,31 @@ function getAllNiche($pdo, $id){
 
 }
 
+function getLieuID($pdo, $adress, $postal, $city){
+    $statement = $pdo->prepare("SELECT l_id FROM lieu WHERE l_adress = :adress AND l_city = :city AND l_postal = :postal");
+    $statement->bindParam(':adress', $adress);
+    $statement->bindParam(':city', $city);
+    $statement->bindParam(':postal', $postal);
+    $statement->execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!empty($result)) {
+        return $result['l_id'];
+    } else {
+        return null;
+    }
+}
+
+function getAllLieux($pdo){
+    $statement = $pdo->prepare("SELECT l_adress, l_city, l_postal FROM lieu");
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!empty($result)) {
+        return $result;
+    } else {
+        return null;
+    }
+}
+
 ?>
