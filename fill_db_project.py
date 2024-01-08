@@ -58,7 +58,7 @@ def all(file):
                 time = "08:00:00 +00:00"
         spe = ["Généraliste", "Cardiologue", "Dermatologue", "Gynécologue", "Ophtalmologue", "ORL", "Pédiatre", "Pneumologue", "Psychiatre", "Rhumatologue", "Urologue", "Kinésitherpeute"]
         print("Rdv generated")
-        for i in range(1, 100):
+        for i in range(1, 1000):
             faker3 = Faker('fr_FR')
             name3 = faker3.first_name()
             surname3 = faker3.last_name()
@@ -91,7 +91,7 @@ def all(file):
         print("Patient generated")
         for i in range(1, 97021):
             projet.write(f"INSERT INTO propose (rdv_id ,m_id) VALUES (")
-            projet.write(f"{i}, {randint(1, 99)});\n")
+            projet.write(f"{i}, {randint(1, 999)});\n")
         print("Propose generated")
         projet.close()
         print("Done")
