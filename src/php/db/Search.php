@@ -1,6 +1,9 @@
 <?php
 function search($pdo, $nom, $postal){
-    if($_POST['postal'] == null){
+    if($_POST["nom"] == null && $_POST["postal"] == null){
+        echo '<p class="ms-5 mt-2 fw-bold">Veuillez entrer un nom ou un lieu</p>';
+    }
+    else if($_POST['postal'] == null){
         $query = $pdo->prepare("SELECT * FROM medecin WHERE m_name = :nom");
         $query->bindParam(':nom', $_POST['nom']);
         $query->execute();
