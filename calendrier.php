@@ -57,10 +57,10 @@
                         <br>
                         <?php
                         echo '<input type="hidden" name="id" id="id" value="' . $_POST['id'] . '">';
-                        echo '<input type="date" name="start" id="date" class="mt-2" value="' . $_POST['start'] . '">';
+                        echo '<input type="date" name="start" id="date" class="mt-2 form-control" value="' . $_POST['start'] . '">';
                         ?>
                         <br>
-                        <input type="submit" value="Valider" class="mt-2">
+                        <input type="submit" value="Valider" class="mt-2 btn btn-outline-danger">
                     </form>
                 </div>
                 <div>

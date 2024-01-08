@@ -69,6 +69,7 @@
                         echo '<div class="card-body">';
                         echo "<h5 class='card-title'>$patient</h5>";
                         echo "<a href='mailto:" . $mail . "' class='card-subtitle mb-2 text-body-secondary'>$mail</a>";
+                        echo '<br>';
                         echo "<a href='tel:" . "0" . $phone . "' class='card-subtitle mb-2 text-body-secondary'>$phone</a>";
                         echo '</div>';
                         echo '</div>';
@@ -81,7 +82,7 @@
                         echo '</div>';
                         echo '</div>';
                         echo '<div class="card-body">';
-                        echo "<h5 class='card-title'>Vous n'avez pas de" . "<br>" . "rendez-vous pour ce créneau</h5>";
+                        echo "<h5 class='card-title'>Vous n'avez pas de" . "<br>" . "patient pour ce créneau</h5>";
                         echo '</div>';
                         echo '</div>';
                     }
@@ -105,9 +106,9 @@
             $lieux = getAllLieux($pdo);
             echo "<form action='src/php/db/scripts/createRDVToDB.php' method='post'>";
             echo "<input type='hidden' name='medID' value='$medID'>";
-            echo "<input type='date' name='date'>";
-            echo "<input type='time' name='time'>";
-            echo "<select name='lieu' id='lieu'>";
+            echo "<input class='form-control' type='date' name='date'>";
+            echo "<input class='form-control' type='time' name='time'>";
+            echo "<select class='form-select' name='lieu' id='lieu'>";
             echo "<option value=''>Choisissez un lieu</option>";
             if ($lieux != null && count($lieux) > 0){
                 foreach ($lieux as $row){
